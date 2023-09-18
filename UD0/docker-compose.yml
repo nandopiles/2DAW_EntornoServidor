@@ -1,0 +1,13 @@
+version: "3.1"
+services:
+  miservicio_php:
+    build: .
+    container_name: miphp
+    volumes:
+      # Montamos nuestra web desde fuera en el directorio web del contenedor
+      - .:/var/www/html
+    expose:
+      - 80
+    ports:
+      - 80:80
+  
