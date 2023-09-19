@@ -23,22 +23,9 @@ function sortList(...$list)
     return $sortedList;
 }
 
-/**
- * Prints the list passed by parameter
- *
- * @param  list $list
- * @return void
- */
-function printList($list)
-{
-    foreach ($list as $num) {
-        printf("%d ", $num);
-    }
-}
-
 $num1 = 3;
 $num2 = 33;
 $num3 = 11;
 
 $sortedList = sortList($num1, $num2, $num3);
-printList($sortedList);
+print(implode(", ", $sortedList)); //"toString" separating by the character we want
