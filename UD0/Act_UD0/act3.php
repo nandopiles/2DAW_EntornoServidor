@@ -52,6 +52,7 @@ function printTable($array)
         <tr>
     ";
 
+    //concat ALWAYS with => .
     foreach ($array as $student) {
         foreach ($student as $data => $val) {
             $initTable .= "
@@ -66,7 +67,7 @@ function printTable($array)
 }
 print(printTable($students));
 
-print_r(array_column($students, "name"). "<br>");
+print_r(array_column($students, "name"). "<br>"); //prints the values of a specific column of an array
 
 $sumArray = [3, 6, 11, 33, 23, 12, 34, 2, 9, 41];
 print(array_sum($sumArray));
