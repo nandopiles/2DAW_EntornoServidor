@@ -1,0 +1,30 @@
+#page {
+    background-color: #FF3477;
+    color:white;
+    font-weight: bold;
+}
+
+#contenido {
+    background-color: #FFEEAA;
+    color: #003377;
+    font-style: italic;
+    font-size: 0.9em;
+    text-align: justify;
+}
+#cab img {
+    border: 1px solid blue;
+    margin:0.5em;
+    box-shadow: 0.1em 0.1em 0.3em black;
+    width: 200px;
+}
+
+#titulo, #cab{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+#titulo h1{
+    
+    text-shadow: 0.1em 0.1em 0.3em black;
+}

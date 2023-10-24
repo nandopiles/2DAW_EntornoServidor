@@ -1,0 +1,11 @@
+{
+    "name": "ferran/jfksl",
+    "autoload": {
+        "psr-4": {
+            "Ferran\\Jfksl\\": "src/"
+        }
+    },
+    "require": {
+        "ramsey/uuid": "^4.7"
+    }
+}

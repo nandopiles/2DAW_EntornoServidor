@@ -1,0 +1,14 @@
+{
+    "name": "ferran/conexwithdb",
+    "autoload": {
+        "psr-4": {
+            "Ferran\\Conexwithdb\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ferran"
+        }
+    ],
+    "require": {}
+}
