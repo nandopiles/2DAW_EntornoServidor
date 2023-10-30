@@ -1,36 +1,34 @@
 version: '3'
 
-services: 
+services:
   apache:
     build: .
-    ports: 
+    ports:
       - 80:80
     volumes:
       - .:/var/www/html
-  
 
-  mysql:
-    image: mysql:8.0
-    command: --default-authentication-plugin=mysql_native_password
+  mariadb:
+    image: mariadb:latest
     ports:
       - 3306:3306
-    environment: 
+    environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./db:/docker-entrypoint-initdb.d       
+      - mariadb_data:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
 
   phpmyadmin:
     image: phpmyadmin:5
     ports:
       - 8080:80
     environment:
-      - PMA_HOST=mysql
-    depends_on: 
-      - mysql 
+      - PMA_HOST=mariadb
+    depends_on:
+      - mariadb
 
-volumes:
-  mysql_data:
+volumes: 
+  mariadb_data:  

@@ -16,4 +16,3 @@ echo 'todo ok';
 
 // Cerrar la conexión
 $enlace->close();
-?>

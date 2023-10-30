@@ -1,0 +1,5 @@
+// ver la ip del docker
+docker inspect {id}
+
+//crear autoloader
+docker run --rm --interactive --tty --volume .:/app composer init
