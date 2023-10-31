@@ -1,45 +1,22 @@
 <?php
+// require('../vendor/autoload.php');
+require('./models/DataBase.php');
+require('./controllers/FunctionsDB.php');
 
 if (isset($_GET['action']))
     $action = $_GET['action'];
 else
-    $action = 'hello';
+    $action = 'list';
 
-if ($action == 'hello') {
-    require_once('./controllers/HelloController.php');
-    require_once('./models/TimeModel.php');
-    require_once('./views/HelloView.php');
+$db = new DataBase();
+$functions = new FunctionsDb($db->getLink());
 
-    $timeModel = new TimeModel();
-    $helloView = new HelloView();
-    $controller = new HelloController($timeModel, $helloView);
-
-    $vTime = $controller->printTime();
-    $helloView->printHTML($vTime);
-} else if ($action == 'bye') {
-    require_once('./controllers/ByeController.php');
-    require_once('./models/TimeModel.php');
-    require_once('./views/ByeView.php');
-
-    // use controllers\Bye\ByeController as ByeController;
-
-    $timeModel = new TimeModel();
-    $byeView = new ByeView();
-    $controller = new ByeController($timeModel, $byeView);
-
-    $vTime = $controller->printTime();
-    $byeView->printHTML($vTime);
-} else if ($action == 'saying') {
-    require_once('./controllers/SayingController.php');
-    require_once('./models/SayingModel.php');
-    require_once('./views/SayingView.php');
-
-    $sayingModel = new SayingModel();
-    $sayingView = new SayingView();
-    $controller = new SayingController($sayingModel, $sayingView);
-
-    $vSaying = $controller->printSaying();
-    $sayingView->printHTML($vSaying);
-} else {
-    echo "<h1>Ruta no encontrada</h1>";
+if ($action == 'list')
+    $functions->select1();
+else if ($action == 'detail') {
+    if (isset($_GET['id']))
+        $id = $_GET['id'];
+    else
+        $id = '1';
+    $functions->select2($id);
 }
