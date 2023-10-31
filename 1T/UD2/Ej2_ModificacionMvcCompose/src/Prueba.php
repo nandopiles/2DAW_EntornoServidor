@@ -14,7 +14,7 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // consult SQL
-    $query = "SELECT titulo, descripcion FROM tareas";
+    $query = "SELECT titulo, fecha_vencimiento FROM tareas";
 
     // Preparar la consulta
     $statement = $pdo->prepare($query);
@@ -24,8 +24,9 @@ try {
 
     // Obtener y mostrar los resultados
     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-        echo "Titulo: " . $row['titulo'] . " Descripcion: " . $row['descripcion'] . "<br>";
+        echo "<b>Titulo:</b> " . $row['titulo'] . "<br><b>Fecha Vencimiento:</b> " . $row['fecha_vencimiento'] . "<br>" . "________________________________<br>";
     }
+    
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }
