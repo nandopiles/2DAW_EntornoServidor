@@ -1,7 +1,12 @@
 <?php
 
-include('./src/models/DataBase.php');
-include('./src/views/ListView.php');
+namespace Ferran\App\Controllers;
+
+use PDO;
+use PDOException;
+
+// include('./src/models/DataBase.php');
+// include('./src/views/ListView.php');
 
 class ListController
 {
@@ -14,7 +19,7 @@ class ListController
         $this->view = $view;
     }
 
-    public function getTaskList()
+    public function getAllTasks()
     {
         try {
             $query = "SELECT titulo, fecha_vencimiento FROM tareas";

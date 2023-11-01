@@ -1,5 +1,7 @@
 <?php
 
+namespace Ferran\App\Views;
+
 class ListView
 {
     /**

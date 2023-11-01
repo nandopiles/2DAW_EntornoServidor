@@ -1,7 +1,12 @@
 <?php
 
-include('./src/models/DataBase.php');
-include('./src/views/DetailView.php');
+namespace Ferran\App\Controllers;
+
+// include('./src/models/DataBase.php');
+// include('./src/views/DetailView.php');
+
+use PDO;
+use PDOException;
 
 class DetailController
 {
@@ -14,7 +19,7 @@ class DetailController
         $this->view = $view;
     }
 
-    public function getTaskDetail($id)
+    public function getTaskById($id)
     {
         try {
             $query = "SELECT * FROM tareas WHERE id=$id";

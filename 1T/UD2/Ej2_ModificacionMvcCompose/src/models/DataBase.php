@@ -1,5 +1,10 @@
 <?php
 
+namespace Ferran\App\Models;
+
+use PDO;
+use PDOException;
+
 class DataBase
 {
     private $host;
