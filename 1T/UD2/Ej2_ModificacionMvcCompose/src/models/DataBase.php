@@ -13,6 +13,7 @@ class DataBase
         try {
             // read the JSON file
             $configFile = file_get_contents(__DIR__ . '/../../config/config.json');
+
             // decode the JSON into an associative array
             $config = json_decode($configFile, true); // true => convert to associative array
             // get the details of the connection

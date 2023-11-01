@@ -26,7 +26,6 @@ try {
     while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
         echo "<b>Titulo:</b> " . $row['titulo'] . "<br><b>Fecha Vencimiento:</b> " . $row['fecha_vencimiento'] . "<br>" . "________________________________<br>";
     }
-    
 } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
 }

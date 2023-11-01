@@ -1,22 +1,36 @@
 <?php
 // require('../vendor/autoload.php');
-require('./models/DataBase.php');
-require('./controllers/FunctionsDB.php');
 
 if (isset($_GET['action']))
     $action = $_GET['action'];
 else
     $action = 'list';
 
-$db = new DataBase();
-$functions = new FunctionsDb($db->getLink());
+if ($action == 'list') {
+    require_once('./models/DataBase.php');
+    require_once('./views/ListView.php');
+    require_once('./controllers/ListController.php');
 
-if ($action == 'list')
-    $functions->select1();
-else if ($action == 'detail') {
+    $model = new DataBase();
+    $view = new ListView();
+    $controller = new ListController($model, $view);
+
+    $data = $controller->getTaskList();
+    $view->printHTML($data);
+} else if ($action == 'detail') {
+    require_once('./models/DataBase.php');
+    require_once('./views/DetailView.php');
+    require_once('./controllers/DetailController.php');
+
     if (isset($_GET['id']))
         $id = $_GET['id'];
     else
         $id = '1';
-    $functions->select2($id);
+
+    $model = new DataBase();
+    $view = new DetailView();
+    $controller = new DetailController($model, $view);
+
+    $data = $controller->getTaskDetail($id);
+    $view->printHTML($data);
 }
