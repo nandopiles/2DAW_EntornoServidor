@@ -2,8 +2,15 @@
 
 namespace Ferran\App\Views;
 
+
 class DetailView
 {
+    /**
+     * print the information with a table format
+     *
+     * @param  Array $data
+     * @return void
+     */
     public function printHTML($data)
     {
         echo '<table border="1">

@@ -2,10 +2,11 @@
 
 namespace Ferran\App\Views;
 
+
 class ListView
 {
     /**
-     * Prints the information with a table format
+     * print the information with a table format
      *
      * @param  Array $data
      * @return void

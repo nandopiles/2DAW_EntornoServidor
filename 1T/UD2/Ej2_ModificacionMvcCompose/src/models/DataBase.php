@@ -5,6 +5,7 @@ namespace Ferran\App\Models;
 use PDO;
 use PDOException;
 
+
 class DataBase
 {
     private $host;
@@ -13,12 +14,16 @@ class DataBase
     private $dbName;
     private $link;
 
-    public function __construct()
+    /**
+     * connect with the database getting the config specified
+     *
+     * @return void
+     */
+    public function connect()
     {
         try {
             // read the JSON file
             $configFile = file_get_contents(__DIR__ . '/../../config/config.json');
-
             // decode the JSON into an associative array
             $config = json_decode($configFile, true); // true => convert to associative array
             // get the details of the connection

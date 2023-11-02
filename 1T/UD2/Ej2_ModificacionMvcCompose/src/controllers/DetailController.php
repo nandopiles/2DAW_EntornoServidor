@@ -2,11 +2,9 @@
 
 namespace Ferran\App\Controllers;
 
-// include('./src/models/DataBase.php');
-// include('./src/views/DetailView.php');
-
 use PDO;
 use PDOException;
+
 
 class DetailController
 {
@@ -19,14 +17,17 @@ class DetailController
         $this->view = $view;
     }
 
-    public function getTaskById($id)
+    /**
+     * retrieve a specific task from the database
+     *
+     * @param  number $id
+     * @return Array an associated array with the task represented by keys
+     */
+    public function getTaskById($id): array
     {
         try {
             $query = "SELECT * FROM tareas WHERE id=$id";
-            // Preparar la consulta
             $statement = $this->getModel()->getLink()->prepare($query);
-
-            // Exec the query
             $statement->execute();
 
             // Get and store the result

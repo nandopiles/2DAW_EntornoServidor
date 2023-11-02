@@ -5,8 +5,6 @@ namespace Ferran\App\Controllers;
 use PDO;
 use PDOException;
 
-// include('./src/models/DataBase.php');
-// include('./src/views/ListView.php');
 
 class ListController
 {
@@ -19,14 +17,16 @@ class ListController
         $this->view = $view;
     }
 
-    public function getAllTasks()
+    /**
+     * retrieve all tasks from the database
+     *
+     * @return Array an associated array with all the tasks represented by keys
+     */
+    public function getAllTasks(): array
     {
         try {
             $query = "SELECT titulo, fecha_vencimiento FROM tareas";
-            // prepare the query
             $statement = $this->getModel()->getLink()->prepare($query);
-
-            // Exec the query
             $statement->execute();
 
             // Get and store the results
