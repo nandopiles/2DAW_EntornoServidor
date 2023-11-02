@@ -1,6 +1,6 @@
 <?php
 
-namespace Ferran\App\Models;
+namespace Ferran\App\Core;
 
 use PDO;
 use PDOException;
@@ -14,6 +14,18 @@ class DataBase
     private $dbName;
     private $link;
 
+    public function __construct()
+    {
+        // decode the JSON into an associative array
+        $config = json_decode(file_get_contents(__DIR__ . '/../../config/config.json'), true); // true => convert to associative array
+        // get the details of the connection
+        $this->host = $config['serverName'];
+        $this->user = $config['userName'];
+        $this->password = $config['password'];
+        $this->dbName = $config['dbName'];
+        $this->connect();
+    }
+
     /**
      * connect with the database getting the config specified
      *
@@ -22,16 +34,6 @@ class DataBase
     public function connect()
     {
         try {
-            // read the JSON file
-            $configFile = file_get_contents(__DIR__ . '/../../config/config.json');
-            // decode the JSON into an associative array
-            $config = json_decode($configFile, true); // true => convert to associative array
-            // get the details of the connection
-            $this->host = $config['serverName'];
-            $this->user = $config['userName'];
-            $this->password = $config['password'];
-            $this->dbName = $config['dbName'];
-
             // $this->link = new mysqli($this->getHost(), $this->getUser(), $this->getPassword(), $this->getDbName());
             $this->link = new PDO("mysql:host=" . $this->getHost() . ";dbname=" . $this->getDbName(), $this->getUser(), $this->getPassword());
             $this->link->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

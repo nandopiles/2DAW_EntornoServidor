@@ -2,8 +2,8 @@
 
 namespace Ferran\App\Controllers;
 
-use PDO;
-use PDOException;
+use Ferran\App\Models\DetailModel;
+use Ferran\App\Views\DetailView;
 
 
 class DetailController
@@ -11,35 +11,10 @@ class DetailController
     private $model;
     private $view;
 
-    public function __construct($model, $view)
+    public function __construct()
     {
-        $this->model = $model;
-        $this->view = $view;
-    }
-
-    /**
-     * retrieve a specific task from the database
-     *
-     * @param  number $id
-     * @return Array an associated array with the task represented by keys
-     */
-    public function getTaskById($id): array
-    {
-        try {
-            $query = "SELECT * FROM tareas WHERE id=$id";
-            $statement = $this->getModel()->getLink()->prepare($query);
-            $statement->execute();
-
-            // Get and store the result
-            $result = array();
-            while ($row = $statement->fetch(PDO::FETCH_ASSOC))
-                $result[] = $row;
-
-            return $result;
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            return array(); // return an empty array
-        }
+        $this->model = new DetailModel();
+        $this->view = new DetailView();
     }
 
     /**
@@ -48,5 +23,13 @@ class DetailController
     public function getModel()
     {
         return $this->model;
+    }
+
+    /**
+     * Get the value of view
+     */
+    public function getView()
+    {
+        return $this->view;
     }
 }
