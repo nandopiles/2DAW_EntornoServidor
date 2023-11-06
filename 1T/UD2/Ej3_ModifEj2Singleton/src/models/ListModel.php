@@ -28,7 +28,7 @@ class ListModel extends DataBase
             return $result;
         } catch (PDOException $e) {
             echo $e->getMessage();
-            return array(); // returns an empty array if smth goes wrong
+            return array(); // return an empty array if smth goes wrong
         }
     }
 }

@@ -2,20 +2,18 @@
 
 namespace Ferran\App\Controllers;
 
-use Ferran\App\Models\DetailModel;
-use Ferran\App\Views\DetailView;
+use Ferran\App\Models\ListModel;
+use Ferran\App\Views\ListView;
 
-
-
-class DetailController
+class ListController
 {
     private $model;
     private $view;
 
     public function __construct()
     {
-        $this->model = new DetailModel();
-        $this->view = new DetailView();
+        $this->model = new ListModel();
+        $this->view = new ListView();
     }
 
     /**

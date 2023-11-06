@@ -9,12 +9,12 @@ use PDOException;
 class DetailModel extends DataBase
 {
     /**
-     * retrieve a specific task from the database
+     * Retrieves a specific task from the database
      *
      * @param  number $id
      * @return Array an associated array with the task represented by keys
      */
-    public function getTaskById($id): array
+    public function getTaskById(int $id): array
     {
         try {
             $query = "SELECT * FROM tareas WHERE id=$id";
@@ -29,7 +29,7 @@ class DetailModel extends DataBase
             return $result;
         } catch (PDOException $e) {
             echo $e->getMessage();
-            return array(); // return an empty array
+            return array(); // returns an empty array
         }
     }
 }

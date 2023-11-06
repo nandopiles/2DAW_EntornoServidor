@@ -6,21 +6,22 @@ use Ferran\App\Core\DataBase;
 use PDO;
 use PDOException;
 
-class ListModel extends DataBase
+class DetailModel extends DataBase
 {
     /**
-     * Retrieves all tasks from the database
+     * Retrieves a specific task from the database
      *
-     * @return Array an associated array with all the tasks represented by keys
+     * @param  number $id
+     * @return Array an associated array with the task represented by keys
      */
-    public function getAllTasks(): array
+    public function getTaskById(int $id): array
     {
         try {
-            $query = "SELECT titulo, fecha_vencimiento FROM tareas";
+            $query = "SELECT * FROM tareas WHERE id=$id";
             $statement = $this->getLink()->prepare($query);
             $statement->execute();
 
-            // Get and store the results
+            // Get and store the result
             $result = array();
             while ($row = $statement->fetch(PDO::FETCH_ASSOC))
                 $result[] = $row;
@@ -28,7 +29,7 @@ class ListModel extends DataBase
             return $result;
         } catch (PDOException $e) {
             echo $e->getMessage();
-            return array(); // returns an empty array if smth goes wrong
+            return array(); // return an empty array
         }
     }
 }
