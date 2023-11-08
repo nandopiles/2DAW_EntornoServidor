@@ -6,8 +6,15 @@ use Ferran\App\Core\DataBase;
 use PDO;
 use PDOException;
 
-class ListModel extends DataBase
+class ListModel
 {
+    private $dbInstance;
+
+    public function __construct()
+    {
+        $this->dbInstance = DataBase::getInstance();
+    }
+
     /**
      * Retrieves all tasks from the database
      *
@@ -17,7 +24,7 @@ class ListModel extends DataBase
     {
         try {
             $query = "SELECT titulo, fecha_vencimiento FROM tareas";
-            $statement = $this->getLink()->prepare($query);
+            $statement = $this->dbInstance->prepare($query);
             $statement->execute();
 
             // Get and store the results

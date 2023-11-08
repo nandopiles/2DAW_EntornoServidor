@@ -8,13 +8,14 @@ use PDOException;
 
 class DataBase
 {
+    private static $instance = null;
     private $host;
     private $user;
     private $password;
     private $dbName;
     private $link;
 
-    public function __construct()
+    private function __construct()
     {
         // decode the JSON into an associative array
         $config = json_decode(file_get_contents(__DIR__ . '/../../config/config.json'), true); // true => convert to associative array
@@ -31,7 +32,7 @@ class DataBase
      *
      * @return void
      */
-    public function connect()
+    private function connect()
     {
         try {
             // $this->link = new mysqli($this->getHost(), $this->getUser(), $this->getPassword(), $this->getDbName());
@@ -43,9 +44,24 @@ class DataBase
     }
 
     /**
+     * Get the Singleton PDO instance for database connection.
+     *
+     * Provides a single point of access to the PDO database connection instance.
+     * If the instance doesn't exist, it creates one and returns it.
+     *
+     * @return PDO The Singleton PDO instance for database connection.
+     */
+    public static function getInstance()
+    {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance->getLink();
+    }
+    /**
      * Gets the value of link
      */
-    public function getLink()
+    private function getLink()
     {
         return $this->link;
     }
@@ -53,7 +69,7 @@ class DataBase
     /**
      * Gets the value of dbName
      */
-    public function getDbName()
+    private function getDbName()
     {
         return $this->dbName;
     }
@@ -61,7 +77,7 @@ class DataBase
     /**
      * Gets the value of password
      */
-    public function getPassword()
+    private function getPassword()
     {
         return $this->password;
     }
@@ -69,7 +85,7 @@ class DataBase
     /**
      * Gets the value of user
      */
-    public function getUser()
+    private function getUser()
     {
         return $this->user;
     }
@@ -77,7 +93,7 @@ class DataBase
     /**
      * Gets the value of host
      */
-    public function getHost()
+    private function getHost()
     {
         return $this->host;
     }

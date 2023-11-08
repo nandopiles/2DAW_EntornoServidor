@@ -6,8 +6,15 @@ use Ferran\App\Core\DataBase;
 use PDO;
 use PDOException;
 
-class DetailModel extends DataBase
+class DetailModel
 {
+    private $dbInstance;
+
+    public function __construct()
+    {
+        $this->dbInstance = DataBase::getInstance();
+    }
+
     /**
      * Retrieves a specific task from the database
      *
@@ -18,7 +25,7 @@ class DetailModel extends DataBase
     {
         try {
             $query = "SELECT * FROM tareas WHERE id=$id";
-            $statement = $this->getLink()->prepare($query);
+            $statement = $this->dbInstance->prepare($query);
             $statement->execute();
 
             // Get and store the result
