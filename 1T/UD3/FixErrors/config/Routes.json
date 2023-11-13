@@ -1,0 +1,14 @@
+{
+    "/": {
+        "controller": "MainController",
+        "action": "main"
+    },
+    "/lista": {
+        "controller": "ListController",
+        "action": "listadoTarea"
+    },
+    "/detalle": {
+        "controller": "DetailController",
+        "action": "detalleTarea"
+    }
+}

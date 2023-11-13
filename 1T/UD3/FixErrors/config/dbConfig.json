@@ -1,0 +1,6 @@
+{
+    "server": "172.24.0.3",
+    "user": "root",
+    "password": "root",
+    "dbname": "midb"
+}

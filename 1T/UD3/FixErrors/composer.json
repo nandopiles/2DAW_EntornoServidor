@@ -1,0 +1,11 @@
+{
+    "name": "daw2-dwes/mvc-simple",
+    "require": {
+        "twig/twig": "3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}
