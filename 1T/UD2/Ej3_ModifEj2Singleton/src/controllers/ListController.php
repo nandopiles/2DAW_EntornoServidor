@@ -2,6 +2,7 @@
 
 namespace Ferran\App\Controllers;
 
+use Ferran\App\Core\DataBase;
 use Ferran\App\Models\ListModel;
 use Ferran\App\Views\ListView;
 

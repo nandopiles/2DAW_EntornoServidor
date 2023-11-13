@@ -2,11 +2,12 @@
 
 namespace Ferran\App\Core;
 
+use Ferran\App\Core\Interfaces\IDataBase\IDataBase;
 use PDO;
 use PDOException;
 
 
-class DataBase
+class DataBase implements IDataBase
 {
     private static $instance = null;
     private $host;
@@ -58,6 +59,12 @@ class DataBase
         }
         return self::$instance->getLink();
     }
+
+    public function executeSQL(string $sql)
+    {
+        
+    }
+
     /**
      * Gets the value of link
      */

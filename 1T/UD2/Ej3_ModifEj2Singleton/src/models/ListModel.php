@@ -10,9 +10,10 @@ class ListModel
 {
     private $dbInstance;
 
-    public function __construct()
+    public function __construct(DataBase $dbInstance)
     {
-        $this->dbInstance = DataBase::getInstance();
+        // $dbInstance = ;
+        // $this->dbInstance = DataBase::getInstance();
     }
 
     /**
@@ -22,6 +23,7 @@ class ListModel
      */
     public function getAllTasks(): array
     {
+
         try {
             $query = "SELECT titulo, fecha_vencimiento FROM tareas";
             $statement = $this->dbInstance->prepare($query);
