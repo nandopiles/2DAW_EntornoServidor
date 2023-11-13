@@ -1,0 +1,65 @@
+{% extends "base.html.twig" %}
+	{% block body %}
+		<body>
+
+			<div class="container">
+				<header class="tm-site-header">
+					<h1 class="tm-site-name">Shelf</h1>
+					<p class="tm-site-description">Your Online Bookstore for {{ nombre }}</p>
+
+					<nav class="navbar navbar-expand-md tm-main-nav-container">
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#tmMainNav" aria-controls="tmMainNav" aria-expanded="false" aria-label="Toggle navigation">
+							<i class="fa fa-bars"></i>
+						</button>
+
+						<div class="collapse navbar-collapse tm-main-nav" id="tmMainNav">
+							<ul class="nav nav-fill tm-main-nav-ul">
+								<li class="nav-item">
+									<a class="nav-link{% if ruta == "index" %} active{% endif %}" href="/">Home</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">Catalogs</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="#">Awards</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link{% if ruta == "team" %} active{% endif %}"href="/team">Our Team</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link{% if ruta == "contact" %} active{% endif %}" href="/contact">Contact Us</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
+
+				</header>
+				{% block content %}{% endblock %}
+				<footer>
+					Copyright &copy;
+					<span class="tm-current-year">2018</span>
+					Shelf Company 
+					                
+					                - Designed by
+					<a href="https://www.facebook.com/tooplate" target="_parent">Tooplate</a>
+				</footer>
+			</div>
+
+			<!-- load JS files -->
+			<script src="js/jquery-1.11.3.min.js"></script>
+			<!-- jQuery (https://jquery.com/download/) -->
+			<script src="js/popper.min.js"></script>
+			<!-- Popper (https://popper.js.org/) -->
+			<script src="js/bootstrap.min.js"></script>
+			<!-- Bootstrap (https://getbootstrap.com/) -->
+			<script>
+				$(document).ready(function () { // Update the current year in copyright
+                    $('.tm-current-year').text(new Date().getFullYear());
+                });
+			</script>
+			{% block googleScript %}
+				<!-- este es el hueco para googleScript -->
+			{% endblock %}
+		</body>
+	{% endblock %}
+

@@ -1,0 +1,17 @@
+{
+    "name": "jorge/t2",
+    "autoload": {
+        "psr-4": {
+            "Jorge\\T2\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jorge Lopez",
+            "email": "jorloque@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}

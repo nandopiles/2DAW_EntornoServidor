@@ -1,0 +1,13 @@
+{
+    "name": "ferran/app",
+    "require": {
+        "twig/twig": "^3.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "ferran\\App\\": "src/",
+            "ferran\\App\\models\\": "src/models",
+            "ferran\\App\\pepito\\": "src/pepito"
+        }
+    }
+}

@@ -1,7 +1,0 @@
-{
-    "name": "ferran/app",
-    "description": "my first template in twig",
-    "require": {
-        "twig/twig": "^3.7"
-    }
-}

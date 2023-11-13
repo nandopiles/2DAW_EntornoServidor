@@ -1,6 +1,0 @@
-{
-    "name": "jorge/t1",
-    "require": {
-        "twig/twig": "^3.0"
-    }
-}
