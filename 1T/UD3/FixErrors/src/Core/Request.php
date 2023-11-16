@@ -13,7 +13,7 @@ class Request implements IRequest
         $rawRoute = $_SERVER["REQUEST_URI"];
         $rawRouteElements = explode("/", $rawRoute);
         $this->route = "/" . $rawRouteElements[3];
-        $this->params = array_slice($rawRouteElements, 2);
+        $this->params = array_slice($rawRouteElements, 4);
         // print_r($this->params);
     }
 

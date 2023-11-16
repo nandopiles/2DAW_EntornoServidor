@@ -9,6 +9,7 @@ class Dispatcher
 {
     private $routeList;
     private IRequest $currentRequest;
+
     public function __construct(IRoutes $routeCollection, IRequest $request)
     {
         $this->routeList = $routeCollection->getRoutes();

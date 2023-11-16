@@ -1,20 +1,20 @@
 {% extends "layout.html" %}
 
 {% block content %}
-          <div class="templatemo_two_column_section">
-           	<div class="templatemo_two_column_left">
-           	  <h1>Detalle Tarea {{resultados.id}} - {{resultados.fecha_creacion | date("d/m/Y")}}</h1>
-                        
-                        <div class="templatemo_gallery_box">
-							                  <p>
-                                <span class="header">{{resultados.titulo | capitalize }}</span><br />
-                                {{resultados.descripcion}}. 
-                                </p>
-                                <p>(vence en {{resultados.fecha_vencimiento | date("d/m/Y")}})<br />
-                                <a href="/lista/{{ session.lastPage }}">&lt;&lt;Listado</a>
-                                </p>
-                        
-              </div>
+<div class="templatemo_two_column_section">
+  <div class="templatemo_two_column_left">
+    <h1>Detalle Tarea {{resultados.id}} - {{resultados.fecha_creacion | date("d/m/Y")}}</h1>
 
-            </div>
-{% endblock %}                    
+    <div class="templatemo_gallery_box">
+      <p>
+        <span class="header">{{resultados.titulo | capitalize }}</span><br />
+        {{resultados.descripcion}}.
+      </p>
+      <p>(vence en {{resultados.fecha_vencimiento | date("d/m/Y")}})<br />
+        <a href="/lista/{{ session.lastPage }}">&lt;&lt;Listado</a>
+      </p>
+
+    </div>
+
+  </div>
+  {% endblock %}

@@ -1,49 +1,48 @@
 {% extends "layout.html" %}
 
 {% block content %}
-          <div class="templatemo_two_column_section">
-           	<div class="templatemo_two_column_left">
-           	  <h1>Listado de tareas</h1>
+<div class="templatemo_two_column_section">
+  <div class="templatemo_two_column_left">
+    <h1>Listado de tareas</h1>
 
-              {# Cálculo de valores para la paginación #}
-              {% set elementsPerPage = 4 %}
-              {% set lowerLimit = (page -1) * elementsPerPage + 1 %}
-              {% set upperLimit = page * elementsPerPage %}
+    {# Cálculo de valores para la paginación #}
+    {% set elementsPerPage = 4 %}
+    {% set lowerLimit = (page -1) * elementsPerPage + 1 %}
+    {% set upperLimit = page * elementsPerPage %}
 
-              {# Lista de resultados paginado #}
-              {% for tarea in resultados %}
-                {% if loop.index >= lowerLimit and loop.index <= upperLimit %}
-                  <div class="templatemo_gallery_box">
-                    <p>
-                      {{tarea.fecha_creacion | date("d/m/Y")}}<br />
-                      <span class="header"><a href="/detalle/{{tarea.id}}">{{tarea.titulo}}</a></span></p>
-                  </div>
-                {% endif %}
-              {% endfor %}
+    {# Lista de resultados paginado #}
+    {% for tarea in resultados %}
+    {% if loop.index >= lowerLimit and loop.index <= upperLimit %} <div class="templatemo_gallery_box">
+      <p>
+        {{tarea.fecha_creacion | date("d/m/Y")}}<br />
+        <span class="header"><a href="/detalle/{{tarea.id}}">{{tarea.titulo}}</a></span>
+      </p>
+  </div>
+  {% endif %}
+  {% endfor %}
 
-              {# Navegador #}
-              {% set totalPages = (((resultados|length)/elementsPerPage)|round(0, 'ceil')) %}
-              {% if page > 1 %} 
-                <a href="/lista/1" class="navigator">&lt;&lt;</a>
-                <a href="/lista/{{ page - 1 }}" class="navigator">&lt;</a>
-              {% else %}
-                <span class="navigator">&lt;&lt;</span>
-                <span class="navigator">&lt;</span>
-              {% endif %}
-              {% for pageButton in 1..totalPages %}
-                  {% if pageButton == page%}
-                    <span class="navigator">{{ pageButton }}</span>
-                  {% else %}
-                    <a href="/lista/{{ pageButton }}" class="navigator">{{ pageButton }}</a> 
-                  {% endif %}            
-              {% endfor %}
-              {% if page < totalPages %} 
-                <a href="/lista/{{ page + 1 }}" class="navigator">&gt;</a>
-                <a href="/lista/{{ totalPages }}" class="navigator">&gt;&gt;</a>
-              {% else %}
-                <span class="navigator">&gt;</span>
-                <span class="navigator">&gt;&gt;</span>
-              {% endif %}
-            </div>
+  {# Navegador #}
+  {% set totalPages = (((resultados|length)/elementsPerPage)|round(0, 'ceil')) %}
+  {% if page > 1 %}
+  <a href="/lista/1" class="navigator">&lt;&lt;</a>
+  <a href="/lista/{{ page - 1 }}" class="navigator">&lt;</a>
+  {% else %}
+  <span class="navigator">&lt;&lt;</span>
+  <span class="navigator">&lt;</span>
+  {% endif %}
+  {% for pageButton in 1..totalPages %}
+  {% if pageButton == page%}
+  <span class="navigator">{{ pageButton }}</span>
+  {% else %}
+  <a href="/lista/{{ pageButton }}" class="navigator">{{ pageButton }}</a>
+  {% endif %}
+  {% endfor %}
+  {% if page < totalPages %} <a href="/lista/{{ page + 1 }}" class="navigator">&gt;</a>
+    <a href="/lista/{{ totalPages }}" class="navigator">&gt;&gt;</a>
+    {% else %}
+    <span class="navigator">&gt;</span>
+    <span class="navigator">&gt;&gt;</span>
+    {% endif %}
+</div>
 
 {% endblock %}

@@ -11,7 +11,6 @@ abstract class AbstractController
     protected $sessionManager;
     public function __construct()
     {
-        echo "I'm in AbstractController<br>";
         $this->sessionManager = new SessionManager();
 
         $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../../templates');

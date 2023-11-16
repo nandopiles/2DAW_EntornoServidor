@@ -19,7 +19,6 @@ class DataBase implements IDataBase
         $username = $this->dbConfig["user"];
         $password = $this->dbConfig["password"];
         $dbName = $this->dbConfig["dbname"];
-        echo $servername;
 
         // Create connection
         $this->conn = new \mysqli($servername, $username, $password, $dbName);
