@@ -25,8 +25,7 @@ class DetailModel
     {
         try {
             $query = "SELECT * FROM tareas WHERE id=$id";
-            $statement = $this->dbInstance->prepare($query);
-            $statement->execute();
+            $statement = $this->getDbInstance()->executeSQL($query);
 
             // Get and store the result
             $result = array();
@@ -38,5 +37,13 @@ class DetailModel
             echo $e->getMessage();
             return array(); // return an empty array
         }
+    }
+
+    /**
+     * Get the value of dbInstance
+     */
+    public function getDbInstance()
+    {
+        return $this->dbInstance;
     }
 }

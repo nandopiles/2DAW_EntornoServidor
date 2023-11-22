@@ -2,10 +2,10 @@
 
 namespace Ferran\App\Core;
 
-use Ferran\App\Core\Interfaces\IDataBase\IDataBase;
+use Ferran\App\Core\Interfaces\IDataBase;
 use PDO;
 use PDOException;
-
+use PDOStatement;
 
 class DataBase implements IDataBase
 {
@@ -45,24 +45,30 @@ class DataBase implements IDataBase
     }
 
     /**
-     * Get the Singleton PDO instance for database connection.
+     * Gets the instance of the class (Singleton pattern).
      *
-     * Provides a single point of access to the PDO database connection instance.
-     * If the instance doesn't exist, it creates one and returns it.
-     *
-     * @return PDO The Singleton PDO instance for database connection.
+     * @return self Returns the single instance of the class.
      */
     public static function getInstance()
     {
         if (self::$instance === null) {
             self::$instance = new self();
         }
-        return self::$instance->getLink();
+        return self::$instance;
     }
 
-    public function executeSQL(string $sql)
+    /**
+     * Does a SQL query and return the result.
+     *
+     * @param  String $sql
+     * @return PDOStatement
+     */
+    public function executeSQL(string $sql): PDOStatement
     {
-        
+        $statement = $this->getLink()->prepare($sql);
+        $statement->execute();
+
+        return $statement;
     }
 
     /**
