@@ -1,0 +1,6 @@
+{
+    "nombre_base_datos": "todolist",
+    "usuario": "root",
+    "contrasena": "root",
+    "host": "172.19.0.3"
+  }
