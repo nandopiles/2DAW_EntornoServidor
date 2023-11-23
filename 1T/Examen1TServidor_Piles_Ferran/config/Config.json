@@ -1,0 +1,6 @@
+{
+    "serverName": "mariadb",
+    "userName": "examen",
+    "password": "examen",
+    "dbName": "empresa"
+}
