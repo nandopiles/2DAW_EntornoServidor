@@ -19,7 +19,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - mariadb_data:/var/lib/mysql
-      - ./db:/docker-entrypoint-initdb.d
+      - ./db/:/docker-entrypoint-initdb.d
 
   phpmyadmin:
     image: phpmyadmin:5

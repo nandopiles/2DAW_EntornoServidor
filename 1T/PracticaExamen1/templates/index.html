@@ -94,6 +94,12 @@
                                             Neogym
                                         </h1>
                                         <h1>{{username}}</h1>
+
+                                        {% for user in users %}
+                                        <h1>{{ user.name }}</h1>
+                                        <h1>{{ user.age }}</h1>
+                                        <h1>{{ user.style }}</h1>
+                                        {% endfor %}
                                         <p>
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                                             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,

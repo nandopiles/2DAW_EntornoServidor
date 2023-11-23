@@ -1,5 +1,5 @@
 {
-    "serverName": "172.22.0.3",
+    "serverName": "mariadb",
     "userName": "root",
     "password": "root",
     "dbName": "midb"

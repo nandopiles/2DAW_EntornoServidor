@@ -1,0 +1,6 @@
+{
+    "host": "mariadb",
+    "dbname": "fepila",
+    "username": "root",
+    "password": "root"
+}

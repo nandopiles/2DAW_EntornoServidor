@@ -22,6 +22,17 @@ class SayingController
     }
 
     /**
+     * Displays the data getting the info from the current model and printing it to the current view.
+     *
+     * @return void
+     */
+    public function displayData()
+    {
+        $saying = $this->getModel()->getSaying();
+        $this->getView()->printHTML($saying);
+    }
+
+    /**
      * Get the value of model
      */
     public function getModel()

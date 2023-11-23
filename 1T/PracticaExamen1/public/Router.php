@@ -16,27 +16,26 @@ else
 if ($action == 'hello') {
     $controller = new \Ferran\App\Controllers\HelloController();
 
-    $time = $controller->getModel()->getTime();
-    $controller->getView()->printHTML($time);
+    $controller->displayData();
 } else if ($action == 'bye') {
     $controller = new \Ferran\App\Controllers\ByeController();
 
-    $time = $controller->getModel()->getTime();
-    $controller->getView()->printHTML($time);
+    $controller->displayData();
 } else if ($action == 'saying') {
     $controller = new \Ferran\App\Controllers\SayingController();
 
-    $saying = $controller->getModel()->getSaying();
-    $controller->getView()->printHTML($saying);
+    $controller->displayData();
 } else if ($action == 'tasks') {
     $controller = new \Ferran\App\Controllers\TaskController();
 
-    $tasks = $controller->getModel()->getAllTasks();
-    // var_dump($tasks);
-    $controller->getView()->printHTML($tasks);
+    $controller->displayData();
 } else if ($action == 'templates') {
     $loader = new \Twig\Loader\FilesystemLoader('../templates');
     $twig = new \Twig\Environment($loader);
 
     echo $twig->render('index.html', ['username' => 'Ferran Piles Lablanca']);
+} else if ($action == 'people') {
+    $controller = new Ferran\App\Controllers\ListController();
+
+    $controller->displayData();
 }

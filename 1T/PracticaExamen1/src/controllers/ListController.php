@@ -2,24 +2,19 @@
 
 namespace Ferran\App\Controllers;
 
-use Ferran\App\Models\TaskModel;
-use Ferran\App\Views\TaskView;
+use Ferran\App\Models\ListModel;
+use Ferran\App\Views\ListView;
 
 
-class TaskController
+class ListController
 {
     private $model;
     private $view;
 
-    /**
-     * __construct that selects the model and view appropriated.
-     *
-     * @return void
-     */
     public function __construct()
     {
-        $this->setModel(new TaskModel());
-        $this->setView(new TaskView());
+        $this->setModel(new ListModel());
+        $this->setView(new ListView());
     }
 
     /**
@@ -29,8 +24,8 @@ class TaskController
      */
     public function displayData()
     {
-        $tasks = $this->getModel()->getAllTasks();
-        $this->getView()->printHTML($tasks);
+        $data = $this->getModel()->getAllPeople();
+        $this->getView()->printHTML($data);
     }
 
     /**

@@ -24,6 +24,17 @@ class HelloController
     }
 
     /**
+     * Displays the data getting the info from the current model and printing it to the current view.
+     *
+     * @return void
+     */
+    public function displayData()
+    {
+        $time = $this->getModel()->getTime();
+        $this->getView()->printHTML($time);
+    }
+
+    /**
      * Get the value of model
      */
     public function getModel()
