@@ -9,12 +9,14 @@ class Dispatcher
 {
     private $routeList;
     private IRequest $currentRequest;
+
     public function __construct(IRoutes $routeCollection, IRequest $request)
     {
         $this->routeList = $routeCollection->getRoutes();
         $this->currentRequest = $request;
         $this->dispatch();
     }
+    
     private function dispatch()
     {
         if (isset($this->routeList[$this->currentRequest->getRoute()])) {

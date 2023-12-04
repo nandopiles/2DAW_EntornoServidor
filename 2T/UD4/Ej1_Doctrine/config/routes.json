@@ -8,7 +8,7 @@
         "action": "list"
     },
     "/delete":{
-        "controller": "DelController",
+        "controller": "DeleteController",
         "action": "delete"
     },
     "/update":{

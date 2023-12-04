@@ -64,13 +64,13 @@ tr:hover {
             </tr>
         </thead>
         <tbody>
-            {% for row in resultados %}
+            {% for row in results %}
                 <tr>
                     <td>{{ row.getTitulo }}</td>
                     <td>{{ row.getFecha_creacion | date("d/m/Y") }}</td>
                     <td class="actions">
-                        <a href="#" class="edit">[X]</a>
-                        <a href="#" class="delete">[U]</a>
+                        <a href="http://localhost/UD4/Ej1_Doctrine/public/Index.php/delete/{{row.getId}}" class="delete">[X]</a>
+                        <a href="#" class="edit">[U]</a>
                     </td>
                 </tr>
             {% endfor %}
