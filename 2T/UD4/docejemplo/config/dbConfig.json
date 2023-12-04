@@ -1,0 +1,7 @@
+{
+    "server": "mariadb",
+    "user": "root",
+    "password": "root",
+    "dbname": "userdb",
+    "driver" : "pdo_mysql"
+}

@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+{% block content %}
+<table>
+    <tr>
+        <th>TITLE</th>
+        <th>CREATION DATE</th>
+        <th>ACTIONS</th>
+    </tr>
+    {% for row in resultados %}
+    <tr>
+        <td>{{row.getTitulo}}</td>
+        <td>{{row.getFecha_creacion | date("d/m/Y")}}</td>
+        <td>[X][U]</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock content %}

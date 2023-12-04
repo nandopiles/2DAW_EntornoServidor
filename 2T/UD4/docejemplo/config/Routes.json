@@ -1,0 +1,19 @@
+{
+    "/lista": {
+        "controller": "ListController",
+        "action": "listado"
+    },
+    "/add":{
+        "controller": "AddController",
+        "action": "add"
+    },
+    "/delete":{
+        "controller": "DelController",
+        "action": "del"
+    },
+    "/update":{
+        "controller": "UpdateController",
+        "action": "update"
+    }
+
+}
