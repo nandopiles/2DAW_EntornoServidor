@@ -6,9 +6,9 @@ use App\Core\AbstractController;
 use App\Entity\Users;
 use App\Core\EntityManager;
 
-class DelController extends AbstractController
+class DeleteController extends AbstractController
 {
-   public function del($id)
+   public function delete($id)
    {
       $em = (new EntityManager())->get();
       $usersRepository = $em->getRepository(Users::class);
