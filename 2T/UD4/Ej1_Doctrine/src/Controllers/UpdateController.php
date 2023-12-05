@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Core\AbstractController;
-use App\Entity\Users;
+use App\Entity\Tasks;
 use App\Core\EntityManager;
 
 class UpdateController extends AbstractController
@@ -12,14 +12,21 @@ class UpdateController extends AbstractController
    {
       $em = (new EntityManager())->get();
 
-      $usersRepository = $em->getRepository(Users::class);
-      $user = $usersRepository->find($id);
+      $tasksRepository = $em->getRepository(Tasks::class);
+      $task = $tasksRepository->find($id);
 
-      $user->setUserName("Pepe");
-      $user->setUserBirthDate(new \DateTime('2021-10-22'));
+      $task->setTitulo("New Task Created");
 
-      $em->persist($user);
+      $actualDate = new \DateTime();
+      $formatDate = $actualDate->format('d/m/Y');
+      $formatDateDatetime = \DateTime::createFromFormat('d/m/Y', $formatDate);
+      $task->setFecha_creacion($formatDateDatetime);
+
+      $em->persist($task);
       $em->flush();
-   }
 
+      $this->render('list.html.twig', [
+         "results" => $tasksRepository->findAll()
+      ]);
+   }
 }

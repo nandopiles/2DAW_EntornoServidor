@@ -69,8 +69,8 @@ tr:hover {
                     <td>{{ row.getTitulo }}</td>
                     <td>{{ row.getFecha_creacion | date("d/m/Y") }}</td>
                     <td class="actions">
+                        <a href="http://localhost/UD4/Ej1_Doctrine/public/Index.php/update/{{row.getId}}" class="edit">[U]</a>
                         <a href="http://localhost/UD4/Ej1_Doctrine/public/Index.php/delete/{{row.getId}}" class="delete">[X]</a>
-                        <a href="#" class="edit">[U]</a>
                     </td>
                 </tr>
             {% endfor %}
