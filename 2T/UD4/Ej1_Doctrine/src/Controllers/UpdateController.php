@@ -15,8 +15,6 @@ class UpdateController extends AbstractController
       $tasksRepository = $em->getRepository(Tasks::class);
       $task = $tasksRepository->find($id);
 
-      $task->setTitulo("New Task Created");
-
       $actualDate = new \DateTime();
       $formatDate = $actualDate->format('d/m/Y');
       $formatDateDatetime = \DateTime::createFromFormat('d/m/Y', $formatDate);
