@@ -16,8 +16,8 @@ class Dispatcher
         $this->currentRequest = $request;
         $this->dispatch();
     }
-    
-    private function dispatch()
+
+    private function dispatch(): void
     {
         if (isset($this->routeList[$this->currentRequest->getRoute()])) {
             $controllerClass = "App\\Controllers\\" . $this->routeList[$this->currentRequest->getRoute()]["controller"];

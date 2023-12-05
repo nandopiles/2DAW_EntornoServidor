@@ -2,6 +2,7 @@
 
 namespace App\Core\Interfaces;
 
-interface IRoutes{
+interface IRoutes
+{
     public function getRoutes();
 }

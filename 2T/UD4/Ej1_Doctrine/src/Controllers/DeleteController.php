@@ -2,11 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Core\AbstractController;
 use App\Entity\Tasks;
 use App\Core\EntityManager;
 
-class DeleteController extends AbstractController
+class DeleteController
 {
    public function delete($id)
    {
@@ -16,8 +15,6 @@ class DeleteController extends AbstractController
       if ($task) $em->remove($task);
       $em->flush();
 
-      $this->render('list.html.twig', [
-         "results" => $tasksRepository->findAll()
-      ]);
+      header("location: http://localhost/UD4/Ej1_Doctrine/public/Index.php/list");
    }
 }

@@ -11,10 +11,10 @@ class EntityManager
 
     public function __construct()
     {
-        $this->dbConfig= json_decode(file_get_contents(__DIR__ . "/../../config/dbConfig.json"), true);
+        $this->dbConfig = json_decode(file_get_contents(__DIR__ . "/../../config/dbConfig.json"), true);
 
 
-        $paths = [__DIR__.'/../Entity'];
+        $paths = [__DIR__ . '/../Entity'];
         $isDevMode = true;
 
         $dbParams = [

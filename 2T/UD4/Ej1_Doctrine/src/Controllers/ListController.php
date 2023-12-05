@@ -16,5 +16,4 @@ class ListController extends AbstractController
          "results" => $tasksRepository->findAll()
       ]);
    }
-
 }

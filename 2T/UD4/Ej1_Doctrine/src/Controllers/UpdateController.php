@@ -2,11 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Core\AbstractController;
 use App\Entity\Tasks;
 use App\Core\EntityManager;
 
-class UpdateController extends AbstractController
+class UpdateController
 {
    public function update($id)
    {
@@ -23,8 +22,6 @@ class UpdateController extends AbstractController
       $em->persist($task);
       $em->flush();
 
-      $this->render('list.html.twig', [
-         "results" => $tasksRepository->findAll()
-      ]);
+      header("location: http://localhost/UD4/Ej1_Doctrine/public/Index.php/list");
    }
 }
