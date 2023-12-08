@@ -1,0 +1,19 @@
+{
+    "/":{
+        "controller": "MainController",
+        "action": "main"
+    },
+    "/list": {
+        "controller": "ListController",
+        "action": "list"
+    },
+    "/delete":{
+        "controller": "CrudController",
+        "action": "delete"
+    },
+    "/update":{
+        "controller": "CrudController",
+        "action": "update"
+    }
+
+}
