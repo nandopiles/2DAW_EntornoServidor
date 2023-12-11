@@ -29,6 +29,11 @@ class TasksRepository extends EntityRepository
         }
     }
 
+    public function insertTask()
+    {
+        
+    }
+
     /**
      * Redirects the location to the url passed by parameter.
      *
