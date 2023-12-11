@@ -2,39 +2,32 @@
 
 namespace App\Controllers;
 
+use App\Core\AbstractController;
 use App\Core\EntityManager;
 use App\Core\Interfaces\IHeader;
 use App\Entity\Tasks;
 
-class CrudController implements IHeader
+class CrudController extends AbstractController implements IHeader
 {
+    protected $em;
+    protected $tasksRepository;
+
+    public function __construct()
+    {
+        $this->em = (new EntityManager())->get();
+        $this->tasksRepository = $this->em->getRepository(Tasks::class);
+    }
+
     public function delete($id)
     {
-        $em = (new EntityManager())->get();
-        $tasksRepository = $em->getRepository(Tasks::class);
-        $task = $tasksRepository->find($id);
-        if ($task) $em->remove($task);
-        $em->flush();
-
-        $this->redirectTo("http://localhost/UD4/Ej1_Doctrine/public/Index.php/list");
+        $this->tasksRepository->deleteTask($id);
+        $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/list");
     }
 
     public function update($id)
     {
-        $em = (new EntityManager())->get();
-
-        $tasksRepository = $em->getRepository(Tasks::class);
-        $task = $tasksRepository->find($id);
-
-        $actualDate = new \DateTime();
-        $formatDate = $actualDate->format('d/m/Y');
-        $formatDateDatetime = \DateTime::createFromFormat('d/m/Y', $formatDate);
-        $task->setFecha_creacion($formatDateDatetime);
-
-        $em->persist($task);
-        $em->flush();
-
-        $this->redirectTo("http://localhost/UD4/Ej1_Doctrine/public/Index.php/list");
+        $this->tasksRepository->updateTask($id);
+        $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/list");
     }
 
     /**

@@ -12,7 +12,7 @@ class ListController extends AbstractController
    {
       $em = (new EntityManager())->get();
       $tasksRepository = $em->getRepository(Tasks::class);
-      $this->render("list.html.twig", [
+      $this->render("index.html.twig", [
          "results" => $tasksRepository->findAll()
       ]);
    }
