@@ -12,26 +12,31 @@ class CrudController extends AbstractController implements IHeader
     protected $em;
     protected $tasksRepository;
 
+    // here works with constructor but in 
     public function __construct()
     {
-        // $this->em = (new EntityManager())->get();
-        // $this->tasksRepository = $this->em->getRepository(Tasks::class);
         $this->setEm((new EntityManager())->get());
         $this->setTasksRepository($this->getEm()->getRepository(Tasks::class));
     }
 
     public function delete($id)
     {
-        // $this->tasksRepository->deleteTask($id);
         $this->getTasksRepository()->deleteTask($id);
         $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/list");
     }
 
     public function update($id)
     {
-        // $this->tasksRepository->updateTask($id);
-        $this->getTasksRepository()->updateTask($id);
-        $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/list");
+        $task = $this->getTasksRepository()->find($id);
+
+        if ($task) {
+            // $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/update/{$id}");
+            // $em = (new EntityManager())->get();
+            // $tasksRepository = $em->getRepository(Tasks::class);
+            $this->render("update.html.twig", ["task" => $task]); // PROBLEM WITH LOAD, cuando le de click a submit => taskrepo
+        }
+        // $this->getTasksRepository()->updateTask($id);
+        // $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/list");
     }
 
     public function insert()

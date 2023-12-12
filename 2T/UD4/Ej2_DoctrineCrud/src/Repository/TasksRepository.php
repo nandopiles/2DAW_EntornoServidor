@@ -33,15 +33,4 @@ class TasksRepository extends EntityRepository
     {
         
     }
-
-    /**
-     * Redirects the location to the url passed by parameter.
-     *
-     * @param  String $url
-     * @return void
-     */
-    public function redirectTo($url)
-    {
-        header("location: " . $url);
-    }
 }

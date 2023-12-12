@@ -14,5 +14,9 @@
   "/update": {
     "controller": "CrudController",
     "action": "update"
+  },
+  "/detail": {
+    "controller": "CrudController",
+    "action": "showDetail"
   }
 }

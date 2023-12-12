@@ -8,10 +8,11 @@ use App\Core\EntityManager;
 
 class ListController extends AbstractController
 {
-   public function list($page = null)
+   public function list()
    {
       $em = (new EntityManager())->get();
       $tasksRepository = $em->getRepository(Tasks::class);
+      
       $this->render("index.html.twig", [
          "results" => $tasksRepository->findAll()
       ]);

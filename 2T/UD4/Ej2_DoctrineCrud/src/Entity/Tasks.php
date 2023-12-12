@@ -71,7 +71,7 @@ class Tasks
      */
     public function getFecha_creacion()
     {
-        return $this->fecha_creacion;
+        return $this->fecha_creacion->format('Y-m-d');
     }
 
     /**
