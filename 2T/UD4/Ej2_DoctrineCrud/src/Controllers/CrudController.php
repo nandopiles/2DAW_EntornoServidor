@@ -12,7 +12,6 @@ class CrudController extends AbstractController implements IHeader
     protected $em;
     protected $tasksRepository;
 
-    // here works with constructor but in 
     public function __construct()
     {
         $this->setEm((new EntityManager())->get());
@@ -27,16 +26,8 @@ class CrudController extends AbstractController implements IHeader
 
     public function update($id)
     {
-        $task = $this->getTasksRepository()->find($id);
-
-        if ($task) {
-            // $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/update/{$id}");
-            // $em = (new EntityManager())->get();
-            // $tasksRepository = $em->getRepository(Tasks::class);
-            $this->render("update.html.twig", ["task" => $task]); // PROBLEM WITH LOAD, cuando le de click a submit => taskrepo
-        }
-        // $this->getTasksRepository()->updateTask($id);
-        // $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/list");
+        $this->getTasksRepository()->updateTask($id);
+        $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/detail/$id");
     }
 
     public function insert()

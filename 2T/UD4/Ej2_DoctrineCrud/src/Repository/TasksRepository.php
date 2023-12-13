@@ -21,16 +21,17 @@ class TasksRepository extends EntityRepository
         $task = $this->find($id);
 
         if ($task) {
-            $actualDate = new \DateTime();
-            $task->setFecha_creacion($actualDate);
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                $task->setTitulo($_POST['title']);
+                // $task->setFecha_creacion($_POST['creationDate']);
 
-            $this->_em->persist($task);
-            $this->_em->flush();
+                $this->_em->persist($task);
+                $this->_em->flush();
+            }
         }
     }
 
     public function insertTask()
     {
-        
     }
 }
