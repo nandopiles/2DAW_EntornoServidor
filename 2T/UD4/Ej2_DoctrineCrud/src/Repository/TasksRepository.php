@@ -22,8 +22,10 @@ class TasksRepository extends EntityRepository
 
         if ($task) {
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                $modifiedDate = \DateTime::createFromFormat('Y-m-d', $_POST['creationDate']);
+
                 $task->setTitulo($_POST['title']);
-                // $task->setFecha_creacion($_POST['creationDate']);
+                $task->setFecha_creacion($modifiedDate);
 
                 $this->_em->persist($task);
                 $this->_em->flush();
