@@ -18,18 +18,35 @@ class CrudController extends AbstractController implements IHeader
         $this->setTasksRepository($this->getEm()->getRepository(Tasks::class));
     }
 
+    /**
+     * Deletes a task by its id.
+     *
+     * @param  number $id
+     * @return void
+     */
     public function delete($id)
     {
         $this->getTasksRepository()->deleteTask($id);
         $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/list");
     }
 
+    /**
+     * Updates a task by its id.
+     *
+     * @param  mixed $id
+     * @return void
+     */
     public function update($id)
     {
         $this->getTasksRepository()->updateTask($id);
         $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/detail/$id");
     }
 
+    /**
+     * Inserts a task by its id.
+     *
+     * @return void
+     */
     public function insert()
     {
         // complete the insert function in TaskRepo too.

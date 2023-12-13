@@ -39,7 +39,7 @@
             border-radius: 4px;
         }
 
-        button {
+        button.submit {
             display: inline-block;
             background-color: #4caf50;
             color: #fff;
@@ -52,30 +52,47 @@
         button:hover {
             background-color: #45a049;
         }
+
+        a {
+            display: inline-block;
+            background-color: #f44336;
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        a:hover {
+            background-color: #d32f2f;
+        }
     </style>
 </head>
+
 <body>
     {% if task is not empty %}
-    <h1>Update Task</h1>
+    <h1>Detail Task</h1>
     <form method="post" action="http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/update/{{task.getId}}">
         <label for="title">Title</label>
         <input type="text" name="title" value="{{ task.getTitulo }}">
         
         <label for="creationDate">Creation Date</label>
-        <input type="date" name="creationDate" value="{{ task.getFecha_creacion }}">
+        <input type="date" name="creationDate" value="{{ task.getFecha_creacion }}" disabled>
         
-        <button type="submit">Submit</button>
+        <button class="submit" type="submit">Submit</button>
+        <a href="http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/delete/{{task.getId}}">Delete</a>
     </form>
 {% else %}
     <h1>Insert new Task</h1>
-    <form>
+    <form method="post" action="http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/update/{{task.getId}}">
         <label for="title">Title</label>
         <input type="text" name="title" value="">
         
         <label for="creationDate">Creation Date</label>
         <input type="date" name="creationDate" value="">
         
-        <a href="#">Submit</a>
+        <button type="submit">Submit</button>
     </form>
 {% endif %}
 

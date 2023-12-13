@@ -8,6 +8,12 @@ use App\Entity\Tasks;
 
 class DetailController extends AbstractController
 {
+    /**
+     * Renders the template used for listing the task that matches with the id given by parameter.
+     *
+     * @param  number $id
+     * @return void
+     */
     public function showDetail($id)
     {
         $em = (new EntityManager())->get();
