@@ -15,7 +15,7 @@
     "controller": "CrudController",
     "action": "update"
   },
-  "insert": {
+  "/insert": {
     "controller": "CrudController",
     "action": "insert"
   },

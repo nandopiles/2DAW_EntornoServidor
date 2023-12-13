@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Entity\Tasks;
+use DateTime;
 use Doctrine\ORM\EntityRepository;
 
 class TasksRepository extends EntityRepository
@@ -34,9 +36,7 @@ class TasksRepository extends EntityRepository
 
         if ($task) {
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
-                $actualDate = new \DateTime();
-                $formatDate = $actualDate->format('Y-m-d');
-                $modifiedDate = \DateTime::createFromFormat('Y-m-d', $formatDate);
+                $modifiedDate = $this->getCurrentDate();
 
                 $task->setTitulo($_POST['title']);
                 $task->setFecha_creacion($modifiedDate);
@@ -47,7 +47,39 @@ class TasksRepository extends EntityRepository
         }
     }
 
+    /**
+     * Inserts a new task with the data obtained by the form into the database. 
+     *
+     * @return number the id of the new task.
+     */
     public function insertTask()
     {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $task = new Tasks();
+
+            $task->setTitulo($_POST['title']);
+            $task->setDescripcion("");
+            $modifiedDate = $this->getCurrentDate();
+            $task->setFecha_creacion($modifiedDate);
+            $task->setFecha_vencimiento($modifiedDate);
+
+            $this->_em->persist($task);
+            $this->_em->flush();
+
+            return $task->getId();
+        }
+    }
+
+    /**
+     * Gets the current Date in 'Y-m-d' format.
+     *
+     * @return DateTime
+     */
+    public function getCurrentDate()
+    {
+        $actualDate = new \DateTime();
+        $formatDate = $actualDate->format('Y-m-d');
+
+        return \DateTime::createFromFormat('Y-m-d', $formatDate);
     }
 }

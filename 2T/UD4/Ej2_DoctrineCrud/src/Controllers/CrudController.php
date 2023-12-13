@@ -43,14 +43,14 @@ class CrudController extends AbstractController implements IHeader
     }
 
     /**
-     * Inserts a task by its id.
+     * Inserts a new task.
      *
      * @return void
      */
     public function insert()
     {
-        // complete the insert function in TaskRepo too.
-        $this->getTasksRepository()->insertTask();
+        $id = $this->getTasksRepository()->insertTask();
+        $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/detail/$id");
     }
 
     /**
