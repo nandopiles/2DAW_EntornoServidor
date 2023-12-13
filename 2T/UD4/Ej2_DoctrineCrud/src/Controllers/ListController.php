@@ -5,9 +5,11 @@ namespace App\Controllers;
 use App\Core\AbstractController;
 use App\Entity\Tasks;
 use App\Core\EntityManager;
+use App\Core\Request;
 
 class ListController extends AbstractController
 {
+
    /**
     * Renders the template used for listing all the tasks.
     *

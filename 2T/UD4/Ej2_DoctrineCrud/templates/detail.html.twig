@@ -72,29 +72,29 @@
 
 <body>
     {% if task is not empty %}
-    <h1>Detail Task</h1>
-    <form method="post" action="http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/update/{{task.getId}}">
-        <label for="title">Title</label>
-        <input type="text" name="title" value="{{ task.getTitulo }}">
-        
-        <label for="creationDate">Creation Date</label>
-        <input type="date" name="creationDate" value="{{ task.getFecha_creacion }}" disabled>
-        
-        <button class="submit" type="submit">Submit</button>
-        <a href="http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/delete/{{task.getId}}">Delete</a>
-    </form>
-{% else %}
-    <h1>Insert new Task</h1>
-    <form method="post" action="http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/insert">
-        <label for="title">Title</label>
-        <input type="text" name="title" value="">
-        
-        <label for="creationDate">Creation Date</label>
-        <input type="date" name="creationDate" value="" disabled>
-        
-        <button class="submit" type="submit">Submit</button>
-    </form>
-{% endif %}
+        <h1>Detail Task:&nbsp;</h1>
+        <form method="post" action="http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/update/{{task.getId}}">
+            <label for="title">Title</label>
+            <input type="text" name="title" value="{{ task.getTitulo }}">
+            
+            <label for="creationDate">Creation Date</label>
+            <input type="date" name="creationDate" value="{{ task.getFecha_creacion }}" disabled>
+            
+            <button class="submit" type="submit">Submit</button>
+            <a href="http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/delete/{{task.getId}}">Delete</a>
+        </form>
+    {% else %}
+        <h1>Insert new Task:&nbsp;</h1>
+        <form method="post" action="http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/insert">
+            <label for="title">Title</label>
+            <input type="text" name="title" value="">
+            
+            <label for="creationDate">Creation Date</label>
+            <input type="date" name="creationDate" value="" disabled>
+            
+            <button class="submit" type="submit">Submit</button>
+        </form>
+    {% endif %}
 
 </body>
 </html>

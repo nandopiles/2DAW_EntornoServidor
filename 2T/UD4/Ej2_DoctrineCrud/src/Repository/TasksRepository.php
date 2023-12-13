@@ -38,8 +38,9 @@ class TasksRepository extends EntityRepository
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $modifiedDate = $this->getCurrentDate();
 
-                $task->setTitulo($_POST['title']);
-                $task->setFecha_creacion($modifiedDate);
+                $task
+                    ->setTitulo($_POST['title'])
+                    ->setFecha_creacion($modifiedDate);
 
                 $this->_em->persist($task);
                 $this->_em->flush();
@@ -55,13 +56,14 @@ class TasksRepository extends EntityRepository
     public function insertTask()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $modifiedDate = $this->getCurrentDate();
             $task = new Tasks();
 
-            $task->setTitulo($_POST['title']);
-            $task->setDescripcion("");
-            $modifiedDate = $this->getCurrentDate();
-            $task->setFecha_creacion($modifiedDate);
-            $task->setFecha_vencimiento($modifiedDate);
+            $task
+                ->setTitulo($_POST['title'])
+                ->setDescripcion("")
+                ->setFecha_creacion($modifiedDate)
+                ->setFecha_vencimiento($modifiedDate);
 
             $this->_em->persist($task);
             $this->_em->flush();

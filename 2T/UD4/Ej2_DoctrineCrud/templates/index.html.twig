@@ -195,6 +195,23 @@
                         {% endfor %}
                     </tbody>
                 </table>
+
+                {# {% set totalPages = (((data|length)/elementsPerPage)|round(0, 'ceil')) %}
+                {% if page > 1 %}
+                    <a href="/list/1">&lt;&lt;</a>
+                    <a href="/list/{{page - 1}}">&lt;</a>
+                {% else %}
+                    <span>&lt;&lt;</span>
+                    <span>&lt;</span>
+                {% endif %}
+                {% for pageButton in 1..totalPages %}
+                    {% if pageButton == page %}
+                        <span>{{pageButton}}</span>
+                    {% else %}
+                        <a href="/list/{{pageButton}}">{{pageButton}}</a>
+                    {% endif %}
+                {% endfor %} #}
+                
             </div> <!-- end of main -->
 
 
