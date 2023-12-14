@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Clientes</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Clients Table</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Client Cod</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Postal Code</th>
+                <th>Area</th>
+                <th>Phone</th>
+                <th>Representative Code</th>
+                <th>Credit Limit</th>
+                <th>Remarks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in clientResults %}
+            <tr>
+                <td>{{ client.getCLIENTE_COD() }}</td>
+                <td>{{ client.getNOMBRE() }}</td>
+                <td>{{ client.getDIREC() }}</td>
+                <td>{{ client.getCIUDAD() }}</td>
+                <td>{{ client.getESTADO() }}</td>
+                <td>{{ client.getCOD_POSTAL() }}</td>
+                <td>{{ client.getAREA() }}</td>
+                <td>{{ client.getTELEFONO() }}</td>
+                <td>{{ client.getREPR_COD() }}</td>
+                <td>{{ client.getLIMITE_CREDITO() }}</td>
+                <td>{{ client.getOBSERVACIONES() }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Employees Table</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Employee No</th>
+                <th>Last Name</th>
+                <th>Job Title</th>
+                <th>Manager</th>
+                <th>Hire Date</th>
+                <th>Salary</th>
+                <th>Commission</th>
+                <th>Department No</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in empResults %}
+            <tr>
+                <td>{{ employee.getEMP_NO() }}</td>
+                <td>{{ employee.getAPELLIDOS() }}</td>
+                <td>{{ employee.getOFICIO() }}</td>
+                <td>{{ employee.getJEFE() }}</td>
+                <td>{{ employee.getFECHA_ALTA() ? employee.getFECHA_ALTA()|date('Y-m-d') : '' }}</td>
+                <td>{{ employee.getSALARIO() }}</td>
+                <td>{{ employee.getCOMISION() }}</td>
+                <td>{{ employee.getDEPT_NO() }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
