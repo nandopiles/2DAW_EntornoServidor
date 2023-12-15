@@ -21,7 +21,7 @@ class ListController extends AbstractController
       $empRepository = $em->getRepository(Emp::class);
       $clientRepository = $em->getRepository(Client::class);
       
-      $this->render("list.html.twig", [
+      $this->render("list.html", [
          "empResults" => $empRepository->findAll(),
          "clientResults" => $clientRepository->findAll()
       ]);
