@@ -45,42 +45,5 @@
     </tbody>
 </table>
 
-<br>
-
-<h2>Employees Table</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Employee No</th>
-            <th>Last Name</th>
-            <th>Job Title</th>
-            <th>Manager</th>
-            <th>Hire Date</th>
-            <th>Salary</th>
-            <th>Commission</th>
-            <th>Department No</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for employee in empResults %}
-        <tr>
-            <td>{{ employee.getEMP_NO() }}</td>
-            <td>{{ employee.getAPELLIDOS() }}</td>
-            <td>{{ employee.getOFICIO() }}</td>
-            <td>{{ employee.getJEFE() }}</td>
-            <td>{{ employee.getFECHA_ALTA() ? employee.getFECHA_ALTA()|date('Y-m-d') : '' }}</td>
-            <td>{{ employee.getSALARIO() }}</td>
-            <td>{{ employee.getCOMISION() }}</td>
-            <td>{{ employee.getDEPT_NO() }}</td>
-            <td>
-                <a href="http://localhost/UD4/Ej3_Doctrine/public/Index.php/detail/{{ employee.getEMP_NO() }}"
-                    class="edit">[U]</a>
-                <a href="http://localhost/UD4/Ej2_Doctrine/public/Index.php/delete/{{ employee.getEMP_NO() }}"
-                    class="delete">[X]</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+<br><br><br>
 {% endblock %}

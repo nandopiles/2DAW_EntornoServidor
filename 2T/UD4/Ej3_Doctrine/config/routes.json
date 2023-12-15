@@ -1,11 +1,15 @@
 {
   "/": {
-    "controller": "ListController",
-    "action": "list"
+    "controller": "MainController",
+    "action": "loadTemplate"
   },
-  "/list": {
-    "controller": "ListController",
-    "action": "list"
+  "/clients": {
+    "controller": "ClientController",
+    "action": "listClients"
+  },
+  "/employees": {
+    "controller": "EmpController",
+    "action": "listEmployees"
   },
   "/delete": {
     "controller": "CrudController",

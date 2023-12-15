@@ -5,24 +5,20 @@ namespace App\Controllers;
 use App\Core\AbstractController;
 use App\Core\EntityManager;
 use App\Entity\Client;
-use App\Entity\Emp;
 
-class ListController extends AbstractController
+class ClientController extends AbstractController
 {
-
    /**
-    * Renders the template used for listing all the tasks.
+    * Renders the template used for listing all the tasks from the Clients table.
     *
     * @return void
     */
-   public function list()
+   public function listClients()
    {
       $em = (new EntityManager())->get();
-      $empRepository = $em->getRepository(Emp::class);
       $clientRepository = $em->getRepository(Client::class);
-      
-      $this->render("list.html", [
-         "empResults" => $empRepository->findAll(),
+
+      $this->render("clientsList.html", [
          "clientResults" => $clientRepository->findAll()
       ]);
    }
