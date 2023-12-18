@@ -11,10 +11,11 @@ use App\Entity\Emp;
 class CrudController extends AbstractController implements IHeader
 {
     protected $em;
-    protected $ClientRepository;
+    protected $clientRepository;
 
     public function __construct()
     {
+        parent::__construct(); // I'm using the parent constructor (AbstractController)
         $this->setEm((new EntityManager())->get());
         $this->setClientRepository($this->getEm()->getRepository(Client::class));
     }
@@ -25,11 +26,11 @@ class CrudController extends AbstractController implements IHeader
      * @param  number $id
      * @return void
      */
-    public function delete($id)
+    /* public function delete($id)
     {
         $this->getClientRepository()->deleteClient($id);
         $this->redirectTo("http://localhost/UD4/Ej3_Doctrine/public/Index.php/");
-    }
+    } */
 
     /**
      * Updates a client by its id.
@@ -41,7 +42,7 @@ class CrudController extends AbstractController implements IHeader
     {
         $empRepository = $this->getEm()->getRepository(Emp::class);
 
-        $this->render("detail.html", [
+        $this->render("update.html", [
             "client" => $this->getClientRepository()->find($id),
             "employees" => $empRepository->findAll()
         ]);
@@ -54,11 +55,11 @@ class CrudController extends AbstractController implements IHeader
      *
      * @return void
      */
-    public function insert()
+    /* public function insert()
     {
         $this->getClientRepository()->insertClient();
         $this->redirectTo("http://localhost/UD4/Ej3_Doctrine/public/Index.php/");
-    }
+    } */
 
     /**
      * Redirects the location to the url passed by parameter.
@@ -72,23 +73,11 @@ class CrudController extends AbstractController implements IHeader
     }
 
     /**
-     * Get the value of ClientRepository
+     * Get the value of em
      */
-    public function getClientRepository()
+    public function getEm()
     {
-        return $this->ClientRepository;
-    }
-
-    /**
-     * Set the value of ClientRepository
-     *
-     * @return  self
-     */
-    public function setClientRepository($ClientRepository)
-    {
-        $this->ClientRepository = $ClientRepository;
-
-        return $this;
+        return $this->em;
     }
 
     /**
@@ -104,10 +93,22 @@ class CrudController extends AbstractController implements IHeader
     }
 
     /**
-     * Get the value of em
+     * Get the value of clientRepository
      */
-    public function getEm()
+    public function getClientRepository()
     {
-        return $this->em;
+        return $this->clientRepository;
+    }
+
+    /**
+     * Set the value of clientRepository
+     *
+     * @return  self
+     */
+    public function setClientRepository($clientRepository)
+    {
+        $this->clientRepository = $clientRepository;
+
+        return $this;
     }
 }

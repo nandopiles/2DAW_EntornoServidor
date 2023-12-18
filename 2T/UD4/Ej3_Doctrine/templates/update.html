@@ -5,7 +5,7 @@
 <div id="form_container">
     <form method="post" action="">
         <div>
-            <h2>Update {{ client.getNOMBRE() }}</h2>
+            <h2>Update {{ client.getNOMBRE() }} Client</h2>
         </div>
         <label for="clientCode">Client Code</label>
         <div>
@@ -51,31 +51,23 @@
         </label>
         <div>
             <select name="reprCode">
-                <option value="7369">S?NCHEZ</option>
-                <option value="7499">ARROYO</option>
-                <option value="7521">SALA</option>
-                <option value="7566">JIM?NEZ</option>
-                <option value="7654">MART?N</option>
-                <option value="7698">NEGRO</option>
-                <option value="7782">CEREZO</option>
-                <option value="7788">GIL</option>
-                <option value="7839">REY</option>
-                <option value="7844">TOVAR</option>
-                <option value="7876">ALONSO</option>
-                <option value="7900">JIMENO</option>
-                <option value="7902">FERN?NDEZ</option>
-                <option value="7934">MU?OZ</option>
+                {% for emp in employees %}
+                <option value="{{ emp.getEMP_NO() }}" {% if emp.getEMP_NO()==client.getREPR_COD() %} selected {% endif
+                    %}>
+                    {{ emp.getAPELLIDOS() }}</option>
+                {% endfor %}
             </select>
         </div>
 
-        <label for="limiteCredito">Credit Limit</label>
+        <label for="creditLimit">Credit Limit</label>
         <div>
-            <input name="limiteCredito" type="number" max="9999999.99" min="0" step=".01" value="" />
+            <input name="creditLimit" type="number" max="9999999.99" min="0" step=".01"
+                value="{{ client.getLIMITE_CREDITO() }}" />
         </div>
 
-        <label for="observaciones">Comments</label>
+        <label for="remarks">Comments</label>
         <div>
-            <textarea name="observaciones" cols="50" rows="5"></textarea>
+            <textarea name="reamrks" cols="50" rows="5">{{ client.getOBSERVACIONES() }}</textarea>
         </div>
 
         <input type="submit" name="submit" value="Insert" />
