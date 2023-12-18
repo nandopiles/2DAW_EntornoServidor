@@ -35,18 +35,7 @@ class ClientRepository extends EntityRepository
 
         if ($client) {
             if ($_SERVER["REQUEST_METHOD"] === "POST") {
-                $client
-                    ->setCLIENTE_COD($_POST['clientCode'])
-                    ->setNOMBRE($_POST['name'])
-                    ->setDIREC($_POST['address'])
-                    ->setCIUDAD($_POST['city'])
-                    ->setESTADO($_POST['state'])
-                    ->setCOD_POSTAL($_POST['zipCode'])
-                    ->setAREA($_POST['area'])
-                    ->setTELEFONO($_POST['phone'])
-                    ->setREPR_COD($_POST['reprCode'])
-                    ->setLIMITE_CREDITO($_POST['creditLimit'])
-                    ->setOBSERVACIONES($_POST['remarks']);
+                $this->setClientData($client, $_POST);
 
                 $this->_em->persist($client);
                 $this->_em->flush();
@@ -54,27 +43,43 @@ class ClientRepository extends EntityRepository
         }
     }
 
-    /* *
+    /**
      * Inserts a new client with the data obtained by the form into the database. 
      *
      * @return number the id of the new client.
      */
-    /* public function insertclient()
+    public function insertClient()
     {
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-            $modifiedDate = $this->getCurrentDate();
-            $client = new client();
+            $newClient = new client();
 
-            $client
-                ->setTitulo($_POST['title'])
-                ->setDescripcion("")
-                ->setFecha_creacion($modifiedDate)
-                ->setFecha_vencimiento($modifiedDate);
+            $this->setClientData($newClient, $_POST);
 
-            $this->_em->persist($client);
+            $this->_em->persist($newClient);
             $this->_em->flush();
-
-            return $client->getId();
         }
-    } */
+    }
+
+    /**
+     * Sets all the data specified on the post signal in the client specified.
+     *
+     * @param  Client $client
+     * @param  array $data
+     * @return void
+     */
+    public function setClientData(Client $client, array $data)
+    {
+        $client
+            ->setCLIENTE_COD($data['clientCode'])
+            ->setNOMBRE($data['name'])
+            ->setDIREC($data['address'])
+            ->setCIUDAD($data['city'])
+            ->setESTADO($data['state'])
+            ->setCOD_POSTAL($data['zipCode'])
+            ->setAREA($data['area'])
+            ->setTELEFONO($data['phone'])
+            ->setREPR_COD($data['reprCode'])
+            ->setLIMITE_CREDITO($data['creditLimit'])
+            ->setOBSERVACIONES($data['remarks']);
+    }
 }

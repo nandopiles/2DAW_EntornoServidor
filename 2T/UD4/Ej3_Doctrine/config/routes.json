@@ -4,7 +4,7 @@
     "action": "loadTemplate"
   },
   "/clients": {
-    "controller": "ClientController",
+    "controller": "ListController",
     "action": "listClients"
   },
   "/delete": {

@@ -3,7 +3,8 @@
 {% block content %}
 
 <div id="form_container">
-    <form method="post" action="">
+    <form method="post"
+        action="http://localhost/UD4/Ej3_Doctrine/public/Index.php/update/{{ client.getCLIENTE_COD() }}">
         <div>
             <h2>Update {{ client.getNOMBRE() }} Client</h2>
         </div>
@@ -67,7 +68,7 @@
 
         <label for="remarks">Comments</label>
         <div>
-            <textarea name="reamrks" cols="50" rows="5">{{ client.getOBSERVACIONES() }}</textarea>
+            <textarea name="remarks" cols="50" rows="5">{{ client.getOBSERVACIONES() }}</textarea>
         </div>
 
         <input type="submit" name="submit" value="Insert" />

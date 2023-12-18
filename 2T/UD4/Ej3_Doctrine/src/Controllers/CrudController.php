@@ -29,7 +29,7 @@ class CrudController extends AbstractController implements IHeader
     /* public function delete($id)
     {
         $this->getClientRepository()->deleteClient($id);
-        $this->redirectTo("http://localhost/UD4/Ej3_Doctrine/public/Index.php/");
+        $this->redirectToList();
     } */
 
     /**
@@ -42,12 +42,12 @@ class CrudController extends AbstractController implements IHeader
     {
         $empRepository = $this->getEm()->getRepository(Emp::class);
 
+        $this->getClientRepository()->updateClient($id);
+
         $this->render("update.html", [
             "client" => $this->getClientRepository()->find($id),
             "employees" => $empRepository->findAll()
         ]);
-        // $this->getClientRepository()->updateClient($id);
-        $this->redirectTo("http://localhost/UD4/Ej3_Doctrine/public/Index.php/detail/$id");
     }
 
     /**
@@ -55,21 +55,28 @@ class CrudController extends AbstractController implements IHeader
      *
      * @return void
      */
-    /* public function insert()
+    public function insert()
     {
+        $empRepository = $this->getEm()->getRepository(Emp::class);
+
         $this->getClientRepository()->insertClient();
-        $this->redirectTo("http://localhost/UD4/Ej3_Doctrine/public/Index.php/");
-    } */
+
+        if (!$_SERVER["REQUEST_METHOD"] === "POST") {
+            $this->render("insert.html", [
+                "employees" => $empRepository->findAll()
+            ]);
+        } else
+            $this->redirectToList();
+    }
 
     /**
-     * Redirects the location to the url passed by parameter.
+     * Redirects to the clients list page.
      *
-     * @param  String $url
      * @return void
      */
-    public function redirectTo($url)
+    public function redirectToList()
     {
-        header("location: " . $url);
+        header("Location: http://localhost/UD4/Ej3_Doctrine/public/Index.php/clients");
     }
 
     /**

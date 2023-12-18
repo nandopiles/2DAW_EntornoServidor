@@ -6,10 +6,10 @@ use App\Core\AbstractController;
 use App\Core\EntityManager;
 use App\Entity\Client;
 
-class ClientController extends AbstractController
+class ListController extends AbstractController
 {
    /**
-    * Renders the template used for listing all the tasks from the Clients table.
+    * Renders the template used for listing all the clients from the Clients table.
     *
     * @return void
     */

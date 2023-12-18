@@ -4,5 +4,5 @@ namespace App\Core\Interfaces;
 
 interface IHeader
 {
-    public function redirectTo($url);
+    public function redirectToList();
 }
