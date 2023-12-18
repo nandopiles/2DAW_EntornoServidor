@@ -13,7 +13,6 @@ class Client
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer", nullable=false, options={"unsigned"=true})
      */
     private $CLIENTE_COD;

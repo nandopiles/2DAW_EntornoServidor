@@ -61,7 +61,7 @@ class CrudController extends AbstractController implements IHeader
 
         $this->getClientRepository()->insertClient();
 
-        if (!$_SERVER["REQUEST_METHOD"] === "POST") {
+        if ($_SERVER["REQUEST_METHOD"] !== "POST") {
             $this->render("insert.html", [
                 "employees" => $empRepository->findAll()
             ]);
