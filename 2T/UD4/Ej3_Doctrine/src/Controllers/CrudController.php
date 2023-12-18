@@ -26,11 +26,11 @@ class CrudController extends AbstractController implements IHeader
      * @param  number $id
      * @return void
      */
-    /* public function delete($id)
+    public function delete($id)
     {
         $this->getClientRepository()->deleteClient($id);
         $this->redirectToList();
-    } */
+    }
 
     /**
      * Updates a client by its id.
