@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Core\AbstractController;
 use App\Core\EntityManager;
 use App\Entity\Client;
+use App\Entity\Emp;
 
 class DetailController extends AbstractController
 {
@@ -19,9 +20,13 @@ class DetailController extends AbstractController
     {
         $em = (new EntityManager())->get();
         $clientRepository = $em->getRepository(Client::class);
+        $empRepository = $em->getRepository(Emp::class);
+
+        $clientSelected = $clientRepository->find($id);
 
         $this->render("detail.html", [
-            "client" => $clientRepository->find($id)
+            "client" => $clientSelected,
+            "emp" => $empRepository->find($clientSelected->getREPR_COD())
         ]);
     }
 }

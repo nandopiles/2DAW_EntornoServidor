@@ -5,52 +5,59 @@ namespace App\Controllers;
 use App\Core\AbstractController;
 use App\Core\EntityManager;
 use App\Core\Interfaces\IHeader;
-use App\Entity\Tasks;
+use App\Entity\Client;
+use App\Entity\Emp;
 
 class CrudController extends AbstractController implements IHeader
 {
     protected $em;
-    protected $tasksRepository;
+    protected $ClientRepository;
 
     public function __construct()
     {
         $this->setEm((new EntityManager())->get());
-        $this->setTasksRepository($this->getEm()->getRepository(Tasks::class));
+        $this->setClientRepository($this->getEm()->getRepository(Client::class));
     }
 
     /**
-     * Deletes a task by its id.
+     * Deletes a client by its id.
      *
      * @param  number $id
      * @return void
      */
     public function delete($id)
     {
-        $this->getTasksRepository()->deleteTask($id);
-        $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/list");
+        $this->getClientRepository()->deleteClient($id);
+        $this->redirectTo("http://localhost/UD4/Ej3_Doctrine/public/Index.php/");
     }
 
     /**
-     * Updates a task by its id.
+     * Updates a client by its id.
      *
-     * @param  mixed $id
+     * @param  number $id
      * @return void
      */
     public function update($id)
     {
-        $this->getTasksRepository()->updateTask($id);
-        $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/detail/$id");
+        $empRepository = $this->getEm()->getRepository(Emp::class);
+
+        $this->render("detail.html", [
+            "client" => $this->getClientRepository()->find($id),
+            "employees" => $empRepository->findAll()
+        ]);
+        // $this->getClientRepository()->updateClient($id);
+        $this->redirectTo("http://localhost/UD4/Ej3_Doctrine/public/Index.php/detail/$id");
     }
 
     /**
-     * Inserts a new task.
+     * Inserts a new client.
      *
      * @return void
      */
     public function insert()
     {
-        $id = $this->getTasksRepository()->insertTask();
-        $this->redirectTo("http://localhost/UD4/Ej2_DoctrineCrud/public/Index.php/detail/$id");
+        $this->getClientRepository()->insertClient();
+        $this->redirectTo("http://localhost/UD4/Ej3_Doctrine/public/Index.php/");
     }
 
     /**
@@ -65,21 +72,21 @@ class CrudController extends AbstractController implements IHeader
     }
 
     /**
-     * Get the value of tasksRepository
+     * Get the value of ClientRepository
      */
-    public function getTasksRepository()
+    public function getClientRepository()
     {
-        return $this->tasksRepository;
+        return $this->ClientRepository;
     }
 
     /**
-     * Set the value of tasksRepository
+     * Set the value of ClientRepository
      *
      * @return  self
      */
-    public function setTasksRepository($tasksRepository)
+    public function setClientRepository($ClientRepository)
     {
-        $this->tasksRepository = $tasksRepository;
+        $this->ClientRepository = $ClientRepository;
 
         return $this;
     }

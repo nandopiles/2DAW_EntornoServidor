@@ -3,85 +3,78 @@
 namespace App\Repository;
 
 use App\Entity\Client;
-use DateTime;
 use Doctrine\ORM\EntityRepository;
 
 class ClientRepository extends EntityRepository
 {
-    // /**
-    //  * Deletes the task that matches with the id given by parameter.
-    //  *
-    //  * @param  number $id
-    //  * @return void
-    //  */
-    // public function deleteTask($id)
-    // {
-    //     $task = $this->find($id);
+    /**
+     * Deletes the client that matches with the id given by parameter.
+     *
+     * @param  number $id
+     * @return void
+     */
+    public function deleteClient($id)
+    {
+        $client = $this->find($id);
 
-    //     if ($task) {
-    //         $this->_em->remove($task);
-    //         $this->_em->flush();
-    //     }
-    // }
+        if ($client) {
+            $this->_em->remove($client);
+            $this->_em->flush();
+        }
+    }
 
-    // /**
-    //  * Updates the task with the given id with the new data obtained by the form into the database. 
-    //  *
-    //  * @param  number $id
-    //  * @return void
-    //  */
-    // public function updateTask($id)
-    // {
-    //     $task = $this->find($id);
+    /**
+     * Updates the client with the given id with the new data obtained by the form into the database. 
+     *
+     * @param  number $id
+     * @return void
+     */
+    public function updateClient($id)
+    {
+        $client = $this->find($id);
 
-    //     if ($task) {
-    //         if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    //             $modifiedDate = $this->getCurrentDate();
+        if ($client) {
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                $client
+                    ->setCLIENTE_COD($_POST['clientCode'])
+                    ->setNOMBRE($_POST['name'])
+                    ->setDIREC($_POST['address'])
+                    ->setCIUDAD($_POST['city'])
+                    ->setESTADO($_POST['state'])
+                    ->setCOD_POSTAL($_POST['zipCode'])
+                    ->setAREA($_POST['area'])
+                    ->setTELEFONO($_POST['phone'])
+                    ->setREPR_COD($_POST['reprCode'])
+                    ->setLIMITE_CREDITO($_POST['creditLimit'])
+                    ->setOBSERVACIONES($_POST['remarks']);
 
-    //             $task
-    //                 ->setTitulo($_POST['title'])
-    //                 ->setFecha_creacion($modifiedDate);
+                $this->_em->persist($client);
+                $this->_em->flush();
+            }
+        }
+    }
 
-    //             $this->_em->persist($task);
-    //             $this->_em->flush();
-    //         }
-    //     }
-    // }
+    /* *
+     * Inserts a new client with the data obtained by the form into the database. 
+     *
+     * @return number the id of the new client.
+     */
+    /* public function insertclient()
+    {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $modifiedDate = $this->getCurrentDate();
+            $client = new client();
 
-    // /**
-    //  * Inserts a new task with the data obtained by the form into the database. 
-    //  *
-    //  * @return number the id of the new task.
-    //  */
-    // public function insertTask()
-    // {
-    //     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    //         $modifiedDate = $this->getCurrentDate();
-    //         $task = new Tasks();
+            $client
+                ->setTitulo($_POST['title'])
+                ->setDescripcion("")
+                ->setFecha_creacion($modifiedDate)
+                ->setFecha_vencimiento($modifiedDate);
 
-    //         $task
-    //             ->setTitulo($_POST['title'])
-    //             ->setDescripcion("")
-    //             ->setFecha_creacion($modifiedDate)
-    //             ->setFecha_vencimiento($modifiedDate);
+            $this->_em->persist($client);
+            $this->_em->flush();
 
-    //         $this->_em->persist($task);
-    //         $this->_em->flush();
-
-    //         return $task->getId();
-    //     }
-    // }
-
-    // /**
-    //  * Gets the current Date in 'Y-m-d' format.
-    //  *
-    //  * @return DateTime
-    //  */
-    // public function getCurrentDate()
-    // {
-    //     $actualDate = new \DateTime();
-    //     $formatDate = $actualDate->format('Y-m-d');
-
-    //     return \DateTime::createFromFormat('Y-m-d', $formatDate);
-    // }
+            return $client->getId();
+        }
+    } */
 }
