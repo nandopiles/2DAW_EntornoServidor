@@ -7,10 +7,6 @@
     "controller": "ClientController",
     "action": "listClients"
   },
-  "/employees": {
-    "controller": "EmpController",
-    "action": "listEmployees"
-  },
   "/delete": {
     "controller": "CrudController",
     "action": "delete"

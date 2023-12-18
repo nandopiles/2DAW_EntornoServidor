@@ -4,28 +4,24 @@ namespace App\Controllers;
 
 use App\Core\AbstractController;
 use App\Core\EntityManager;
-use App\Entity\Tasks;
+use App\Entity\Client;
 
 class DetailController extends AbstractController
 {
+
     /**
-     * Renders the template used for listing the task that matches with the id given by parameter. 
-     * 
-     * If you don't pass the id's task the template will be ready for adding a new task.
+     * Renders the template associated to show the detail of a specific client.
      *
-     * @param  number $id if you don't pass an id it will be ignore.
+     * @param  number $id
      * @return void
      */
-    public function showDetail($id = null)
+    public function showDetail($id)
     {
         $em = (new EntityManager())->get();
-        $tasksRepository = $em->getRepository(Tasks::class);
+        $clientRepository = $em->getRepository(Client::class);
 
-        if ($id !== null) {
-            $this->render("detail.html.twig", [
-                "task" => $tasksRepository->find($id)
-            ]);
-        } else
-            $this->render("detail.html.twig", []);
+        $this->render("detail.html", [
+            "client" => $clientRepository->find($id)
+        ]);
     }
 }

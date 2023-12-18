@@ -6,36 +6,19 @@
 <table>
     <thead>
         <tr>
-            <th>Client Cod</th>
             <th>Name</th>
-            <th>Address</th>
             <th>City</th>
-            <th>State</th>
-            <th>Postal Code</th>
-            <th>Area</th>
-            <th>Phone</th>
-            <th>Representative Code</th>
-            <th>Credit Limit</th>
-            <th>Remarks</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         {% for client in clientResults %}
         <tr>
-            <td>{{ client.getCLIENTE_COD() }}</td>
-            <td>{{ client.getNOMBRE() }}</td>
-            <td>{{ client.getDIREC() }}</td>
+            <td><a href="http://localhost/UD4/Ej3_Doctrine/public/Index.php/detail/{{ client.getCLIENTE_COD() }}">{{
+                    client.getNOMBRE() }}</a></td>
             <td>{{ client.getCIUDAD() }}</td>
-            <td>{{ client.getESTADO() }}</td>
-            <td>{{ client.getCOD_POSTAL() }}</td>
-            <td>{{ client.getAREA() }}</td>
-            <td>{{ client.getTELEFONO() }}</td>
-            <td>{{ client.getREPR_COD() }}</td>
-            <td>{{ client.getLIMITE_CREDITO() }}</td>
-            <td>{{ client.getOBSERVACIONES() }}</td>
             <td>
-                <a href="http://localhost/UD4/Ej3_Doctrine/public/Index.php/detail/{{ client.getCLIENTE_COD() }}"
+                <a href="http://localhost/UD4/Ej3_Doctrine/public/Index.php/update/{{ client.getCLIENTE_COD() }}"
                     class="edit">[U]</a>
                 <a href="http://localhost/UD4/Ej2_Doctrine/public/Index.php/delete/{{ client.getCLIENTE_COD() }}"
                     class="delete">[X]</a>

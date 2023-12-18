@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>{{ client.getNOMBRE() }}'s Info</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Client Cod</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Postal Code</th>
+            <th>Area</th>
+            <th>Phone</th>
+            <th>Representative Code</th>
+            <th>Credit Limit</th>
+            <th>Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <th>{{ client.getCLIENTE_COD() }}</th>
+        <th>{{ client.getNOMBRE() }}</th>
+        <th>{{ client.getDIREC() }}</th>
+        <th>{{ client.getCIUDAD() }}</th>
+        <th>{{ client.getESTADO() }}</th>
+        <th>{{ client.getCOD_POSTAL() }}</th>
+        <th>{{ client.getAREA() }}</th>
+        <th>{{ client.getTELEFONO() }}</th>
+        <th>{{ client.getREPR_COD() }}</th>
+        <th>{{ client.getLIMITE_CREDITO() }}</th>
+        <th>{{ client.getOBSERVACIONES() }}</th>
+    </tbody>
+</table>
+
+<br><br><br>
+{% endblock %}
