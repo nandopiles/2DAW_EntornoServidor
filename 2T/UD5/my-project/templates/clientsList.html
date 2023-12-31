@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Clients Table</h2>
+<a href="http://localhost/UD4/Ej3_Doctrine/public/Index.php/insert/" class="edit">[Insert]</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in clientResults %}
+        <tr>
+            <td><a href="http://localhost/UD4/Ej3_Doctrine/public/Index.php/detail/{{ client.getCLIENTE_COD() }}">{{
+                    client.getNOMBRE() }}</a></td>
+            <td>{{ client.getCIUDAD() }}</td>
+            <td>
+                <a href="http://localhost/UD4/Ej3_Doctrine/public/Index.php/update/{{ client.getCLIENTE_COD() }}"
+                    class="edit">[U]</a>
+                <a href="http://localhost/UD4/Ej3_Doctrine/public/Index.php/delete/{{ client.getCLIENTE_COD() }}"
+                    class="delete">[X]</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br><br><br>
+{% endblock %}
