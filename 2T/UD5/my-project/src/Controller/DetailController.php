@@ -19,7 +19,7 @@ class DetailController extends AbstractController
      * @param  number $id
      * @return Response
      */
-    #[Route('/detail/{id}', name: 'detail_client')]
+    #[Route('/client/detail/{id}', name: 'detail_client')]
     public function showDetail(EntityManagerInterface $entityManager, $id): Response
     {
         $clientRepository = $entityManager->getRepository(Client::class);

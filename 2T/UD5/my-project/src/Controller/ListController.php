@@ -17,7 +17,7 @@ class ListController extends AbstractController
      * @param  EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/clients/list', name: 'list_clients')]
+    #[Route('/client/list', name: 'list_clients')]
     public function listClients(EntityManagerInterface $entityManager): Response
     {
         $clientRepository = $entityManager->getRepository(Client::class);
