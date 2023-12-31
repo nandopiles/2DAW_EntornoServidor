@@ -3,7 +3,7 @@
 {% block content %}
 
 <h2>Clients Table</h2>
-<a href="http://localhost/UD4/Ej3_Doctrine/public/Index.php/insert/" class="edit">[Insert]</a>
+<a href="/insert" class="edit">[Insert]</a>
 
 <table>
     <thead>
@@ -16,7 +16,7 @@
     <tbody>
         {% for client in clients %}
         <tr>
-            <td><a href="http://localhost/UD4/Ej3_Doctrine/public/Index.php/detail/{{ client.getCLIENTE_COD() }}">{{
+            <td><a href="/detail/{{ client.getCLIENTE_COD() }}">{{
                     client.getNOMBRE() }}</a></td>
             <td>{{ client.getCIUDAD() }}</td>
             <td>
