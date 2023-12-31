@@ -16,7 +16,6 @@ class ListController extends AbstractController
      *
      * @return Response
      */
-    #[Route('/', name: 'main_window')]
     #[Route('/clients/list', name: 'list_clients')]
     public function listClients(EntityManagerInterface $entityManager): Response
     {
