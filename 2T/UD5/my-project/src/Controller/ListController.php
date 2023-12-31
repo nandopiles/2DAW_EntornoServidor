@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
-use App\Core\AbstractController;
-use App\Core\EntityManager;
-use App\Entity\Client;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Client;
+
 
 class ListController extends AbstractController
 {
@@ -15,14 +16,15 @@ class ListController extends AbstractController
      *
      * @return Response
      */
-    #[Route('/list')]
-    public function listClients(): Response
+    #[Route('/', name: 'main_window')]
+    #[Route('/clients/list', name: 'list_clients')]
+    public function listClients(EntityManagerInterface $entityManager): Response
     {
-        $em = (new EntityManager())->get();
-        $clientRepository = $em->getRepository(Client::class);
+        $clientRepository = $entityManager->getRepository(Client::class);
+        $clients = $clientRepository->findAll();
 
-        return $this->render("clientsList.html", [
-            "clientResults" => $clientRepository->findAll()
+        return $this->render('clientsList.html', [
+            'clients' => $clients,
         ]);
     }
 }

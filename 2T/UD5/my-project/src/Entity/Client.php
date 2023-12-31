@@ -5,52 +5,42 @@ namespace App\Entity;
 use App\Repository\ClientRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=ClientRepository::class)
- * @ORM\Table(name="CLIENTE")
- */
+#[ORM\Entity(repositoryClass: ClientRepository::class)]
+#[ORM\Table(name: "CLIENTE")]
 class Client
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer", nullable=false, options={"unsigned"=true})
-     */
+    #[ORM\Id]
+    #[ORM\Column(type: "integer", nullable: false, options: ["unsigned" => true])]
     private $CLIENTE_COD;
 
-    /** @ORM\Column(type="string", length="45") */
+    #[ORM\Column(type: "string", length: 45)]
     private $NOMBRE;
 
-    /** @ORM\Column(type="string", length="40") */
+    #[ORM\Column(type: "string", length: 40)]
     private $DIREC;
 
-    /** @ORM\Column(type="string", length="30") */
+    #[ORM\Column(type: "string", length: 30)]
     private $CIUDAD;
 
-    /** @ORM\Column(type="string", length="2", nullable=true, options={"default" : NULL}) */
+    #[ORM\Column(type: "string", length: 2, nullable: true, options: ["default" => NULL])]
     private $ESTADO;
 
-    /** @ORM\Column(type="string", length="9") */
+    #[ORM\Column(type: "string", length: 9)]
     private $COD_POSTAL;
 
-    /** @ORM\Column(type="integer", nullable=true, options={"default" : NULL}) */
+    #[ORM\Column(type: "integer", nullable: true, options: ["default" => NULL])]
     private $AREA;
 
-    /** @ORM\Column(type="string", length="9", options={"default" : NULL}) */
+    #[ORM\Column(type: "string", length: 9, options: ["default" => NULL])]
     private $TELEFONO;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true, options={"unsigned"=true, "default"=NULL})
-     */
+    #[ORM\Column(type: "integer", nullable: true, options: ["unsigned" => true, "default" => NULL])]
     private $REPR_COD;
 
-    /**
-     * @ORM\Column(type="decimal", precision=9, scale=2, nullable=true, options={"unsigned"=true, "default"=NULL})
-     */
+    #[ORM\Column(type: "decimal", precision: 9, scale: 2, nullable: true, options: ["unsigned" => true, "default" => NULL])]
     private $LIMITE_CREDITO;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: "text", nullable: true)]
     private $OBSERVACIONES;
 
 
