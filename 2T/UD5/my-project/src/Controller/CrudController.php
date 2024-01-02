@@ -30,10 +30,10 @@ class CrudController extends AbstractController implements IHeader
      * @return void
      */
     #[Route('/client/delete/{id}', name: 'delete_client')]
-    public function delete($id)
+    public function delete($id): Response
     {
         $this->getClientRepository()->deleteClient($id);
-        $this->redirectToList();
+        return $this->redirectToList();
     }
 
     /**
@@ -78,7 +78,7 @@ class CrudController extends AbstractController implements IHeader
     /**
      * Redirects to the clients list page.
      *
-     * @return void
+     * @return Response
      */
     public function redirectToList(): Response
     {
