@@ -27,7 +27,7 @@ class CrudController extends AbstractController implements IHeader
      * Deletes a client by its id.
      *
      * @param  number $id
-     * @return void
+     * @return Response
      */
     #[Route('/client/delete/{id}', name: 'delete_client')]
     public function delete($id): Response
@@ -40,7 +40,7 @@ class CrudController extends AbstractController implements IHeader
      * Updates a client by its id.
      *
      * @param  number $id
-     * @return void
+     * @return Response
      */
     #[Route('/client/update/{id}', name: 'update_client')]
     public function update($id): Response
@@ -58,7 +58,7 @@ class CrudController extends AbstractController implements IHeader
     /**
      * Inserts a new client.
      *
-     * @return void
+     * @return Response
      */
     #[Route('/client/insert', methods: ['GET'], name: 'insert_client')]
     public function insert(Request $request): Response
@@ -84,8 +84,6 @@ class CrudController extends AbstractController implements IHeader
     {
         return new RedirectResponse('/client/list');
     }
-
-
 
     /**
      * Get the value of clientRepository
