@@ -6,6 +6,7 @@ use App\Entity\Cliente;
 use App\Entity\Emp;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -63,11 +64,11 @@ class ClientsController extends AbstractController
      * @return void
      */
     #[Route('/client/update/{id}', name: 'update_client')]
-    public function update(int $id): Response
+    public function update(int $id, Request $request): Response
     {
         $empRepository = $this->getEntityManager()->getRepository(Emp::class);
 
-        $this->getClientRepository()->updateClient($id);
+        $this->getClientRepository()->updateClient($id, $request);
 
         return $this->render("update.html", [
             "client" => $this->getClientRepository()->find($id),

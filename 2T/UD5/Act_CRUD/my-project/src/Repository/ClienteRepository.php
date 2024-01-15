@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Cliente;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @extends ServiceEntityRepository<Cliente>
@@ -22,22 +23,21 @@ class ClienteRepository extends ServiceEntityRepository
     }
 
     /**
-     * Updates the client with the given id with the new data obtained by the form into the database. 
+     * Updates the client with the given id with the new data obtained by the form into the database.
      *
      * @param  integer $id
+     * @param  Request $request
      * @return void
      */
-    public function updateClient(int $id): void
+    public function updateClient(int $id, Request $request): void
     {
         $client = $this->find($id);
 
-        if ($client) {
-            if ($_SERVER["REQUEST_METHOD"] === "POST") {
-                $this->setClientData($client, $_POST);
+        if ($client && $request->isMethod('POST')) {
+            $this->setClientData($client, $request->request->all());
 
-                $this->_em->persist($client);
-                $this->_em->flush();
-            }
+            $this->_em->persist($client);
+            $this->_em->flush();
         }
     }
 
