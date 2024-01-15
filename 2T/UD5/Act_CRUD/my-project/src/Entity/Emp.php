@@ -35,7 +35,7 @@ class Emp
     #[ORM\Column]
     private ?int $dept_no = null;
 
-    public function getId(): ?int
+    public function getEmp_no(): ?int
     {
         return $this->emp_no;
     }

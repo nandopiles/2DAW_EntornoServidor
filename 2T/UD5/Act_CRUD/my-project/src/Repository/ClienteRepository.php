@@ -21,28 +21,45 @@ class ClienteRepository extends ServiceEntityRepository
         parent::__construct($registry, Cliente::class);
     }
 
-//    /**
-//     * @return Cliente[] Returns an array of Cliente objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('c.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Updates the client with the given id with the new data obtained by the form into the database. 
+     *
+     * @param  integer $id
+     * @return void
+     */
+    public function updateClient(int $id): void
+    {
+        $client = $this->find($id);
 
-//    public function findOneBySomeField($value): ?Cliente
-//    {
-//        return $this->createQueryBuilder('c')
-//            ->andWhere('c.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        if ($client) {
+            if ($_SERVER["REQUEST_METHOD"] === "POST") {
+                $this->setClientData($client, $_POST);
+
+                $this->_em->persist($client);
+                $this->_em->flush();
+            }
+        }
+    }
+
+    /**
+     * Sets all the data specified on the post signal in the client specified.
+     *
+     * @param  Client $client
+     * @param  array $data
+     * @return void
+     */
+    public function setClientData(Cliente $client, array $data): void
+    {
+        $client
+            ->setNombre($data['name'])
+            ->setDirec($data['address'])
+            ->setCiudad($data['city'])
+            ->setEstado($data['state'])
+            ->setCodPostal($data['zipCode'])
+            ->setArea($data['area'])
+            ->setTelefono($data['phone'])
+            ->setReprCod($data['reprCode'])
+            ->setLimiteCredito($data['creditLimit'])
+            ->setObservaciones($data['remarks']);
+    }
 }
