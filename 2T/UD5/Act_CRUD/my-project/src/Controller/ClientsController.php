@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Cliente;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,16 +10,20 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ClientsController extends AbstractController
 {
-    private $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    #[Route('/client/list', name: 'app_clients')]
+    /**
+     * Displays all the clients saved in the database.
+     *
+     * @param  EntityManagerInterface $entityManager
+     * @return Response
+     */
+    public function listClients(EntityManagerInterface $entityManager): Response
     {
-        $this->entityManager = $entityManager;
-    }
+        $clientRepository = $entityManager->getRepository(Cliente::class);
+        $clients = $clientRepository->findAll();
 
-    #[Route('/', name: 'app_main')]
-    public function showMain(): Response
-    {
-        return $this->render('layout.html', []);
+        return $this->render('clientsList.html', [
+            "clients" => $clients
+        ]);
     }
 }

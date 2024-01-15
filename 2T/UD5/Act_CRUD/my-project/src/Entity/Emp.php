@@ -12,7 +12,7 @@ class Emp
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $emp_no = null;
 
     #[ORM\Column(length: 10)]
     private ?string $apellidos = null;
@@ -37,7 +37,7 @@ class Emp
 
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->emp_no;
     }
 
     public function getApellidos(): ?string

@@ -12,7 +12,7 @@ class Cliente
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $cliente_cod = null;
 
     #[ORM\Column(length: 45)]
     private ?string $nombre = null;
@@ -44,9 +44,9 @@ class Cliente
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $observaciones = null;
 
-    public function getId(): ?int
+    public function getCliente_cod(): ?int
     {
-        return $this->id;
+        return $this->cliente_cod;
     }
 
     public function getNombre(): ?string
