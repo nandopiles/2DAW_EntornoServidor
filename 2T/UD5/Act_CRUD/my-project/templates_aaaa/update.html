@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div id="form_container">
+    <form method="post" action="/client/update/{{ client.getCLIENTE_COD() }}">
+        <div>
+            <h2>Update {{ client.getNOMBRE() }} Client</h2>
+        </div>
+        <label for="clientCode">Client Code</label>
+        <div>
+            <input name="clientCode" type="number" size="5" value="{{ client.getCLIENTE_COD() }}" />
+        </div>
+
+        <label for="name">Name</label>
+        <div>
+            <input name="name" type="text" maxlength="45" size="45" value="{{ client.getNOMBRE() }}" />
+        </div>
+
+        <label for="address">Address</label>
+        <div>
+            <input name="address" type="text" maxlength="40" size="40" value="{{ client.getDIREC() }}" />
+        </div>
+
+        <label for="city">City</label>
+        <div>
+            <input name="city" type="text" maxlength="30" size="30" value="{{ client.getCIUDAD() }}" />
+        </div>
+
+        <label for="state">State</label>
+        <div>
+            <input name="state" type="text" maxlength="2" size="2" value="{{ client.getESTADO() }}" />
+        </div>
+
+        <label for="zipCode">ZIP Code</label>
+        <div>
+            <input name="zipCode" type="text" maxlength="9" size="9" value="{{ client.getCOD_POSTAL() }}" />
+        </div>
+
+        <label for="area">Area</label>
+        <div>
+            <input name="area" type="number" maxlength="5" size="5" value="{{ client.getAREA() }}" />
+        </div>
+
+        <label for="phone">Telephone</label>
+        <div>
+            <input name="phone" type="text" maxlength="9" size="9" value="{{ client.getTELEFONO() }}" />
+        </div>
+
+        <label for="reprCode">Surname Boss</label>
+        <div>
+            <select name="reprCode">
+                {% for emp in employees %}
+                <option value="{{ emp.getEMP_NO() }}" {% if emp.getEMP_NO()==client.getREPR_COD() %} selected {% endif
+                    %}>
+                    {{ emp.getAPELLIDOS() }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <label for="creditLimit">Credit Limit</label>
+        <div>
+            <input name="creditLimit" type="number" max="9999999.99" min="0" step=".01"
+                value="{{ client.getLIMITE_CREDITO() }}" />
+        </div>
+
+        <label for="remarks">Comments</label>
+        <div>
+            <textarea name="remarks" cols="50" rows="5">{{ client.getOBSERVACIONES() }}</textarea>
+        </div>
+
+        <input type="submit" name="submit" value="Update" />
+    </form>
+</div>
+
+<br><br><br>
+{% endblock %}
