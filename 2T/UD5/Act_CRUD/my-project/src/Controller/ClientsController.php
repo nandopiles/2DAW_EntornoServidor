@@ -61,7 +61,7 @@ class ClientsController extends AbstractController
      * Updates a client by its id.
      *
      * @param  integer $id
-     * @return void
+     * @return Response
      */
     #[Route('/client/update/{id}', name: 'update_client')]
     public function update(int $id, Request $request): Response
@@ -74,6 +74,28 @@ class ClientsController extends AbstractController
             "client" => $this->getClientRepository()->find($id),
             "employees" => $empRepository->findAll()
         ]);
+    }
+
+    /**
+     * Inserts a new client.
+     *
+     * @return Response
+     */
+    #[Route('/client/insert', methods: ['GET', 'POST'], name: 'insert_client')]
+    public function insert(Request $request): Response
+    {
+        $empRepository = $this->getEntityManager()->getRepository(Emp::class);
+
+        $this->getClientRepository()->insertClient($request);
+
+        if ($request->isMethod('GET')) {
+            return $this->render("insert.html", [
+                "employees" => $empRepository->findAll()
+            ]);
+        } else
+            return $this->redirectToRoute('app_clients', [
+                "clients" => $this->getClientRepository()->findAll()
+            ]);
     }
 
     /**

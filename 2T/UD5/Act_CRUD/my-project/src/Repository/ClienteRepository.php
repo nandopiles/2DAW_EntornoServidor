@@ -42,6 +42,23 @@ class ClienteRepository extends ServiceEntityRepository
     }
 
     /**
+     * Inserts a new client with the data obtained by the form into the database. 
+     *
+     * @return void 
+     */
+    public function insertClient(Request $request)
+    {
+        if ($request->isMethod('POST')) {
+            $newClient = new Cliente();
+
+            $this->setClientData($newClient, $request->request->all());
+
+            $this->_em->persist($newClient);
+            $this->_em->flush();
+        }
+    }
+
+    /**
      * Sets all the data specified on the post signal in the client specified.
      *
      * @param  Client $client
