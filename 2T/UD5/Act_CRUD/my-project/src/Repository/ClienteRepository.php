@@ -58,6 +58,8 @@ class ClienteRepository extends ServiceEntityRepository
         }
     }
 
+    // do the assets with CSS
+
     /**
      * Sets all the data specified on the post signal in the client specified.
      *
