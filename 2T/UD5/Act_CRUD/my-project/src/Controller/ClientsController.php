@@ -68,7 +68,9 @@ class ClientsController extends AbstractController
     {
         $empRepository = $this->getEntityManager()->getRepository(Emp::class);
 
-        $this->getClientRepository()->updateClient($id, $request);
+        if ($request->isMethod('POST')) {
+            $this->getClientRepository()->updateClient($id, $request);
+        }
 
         return $this->render("update.html", [
             "client" => $this->getClientRepository()->find($id),
@@ -96,6 +98,22 @@ class ClientsController extends AbstractController
             return $this->redirectToRoute('app_clients', [
                 "clients" => $this->getClientRepository()->findAll()
             ]);
+    }
+
+    /**
+     * Deletes a client by its id.
+     *
+     * @param  number $id
+     * @return void
+     */
+    #[Route('/client/delete/{id}', name: 'delete_client')]
+    public function delete($id): Response
+    {
+        $this->getClientRepository()->deleteClient($id);
+
+        return $this->redirectToRoute('app_clients', [
+            "clients" => $this->getClientRepository()->findAll()
+        ]);
     }
 
     /**

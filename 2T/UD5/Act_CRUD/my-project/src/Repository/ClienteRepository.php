@@ -33,7 +33,7 @@ class ClienteRepository extends ServiceEntityRepository
     {
         $client = $this->find($id);
 
-        if ($client && $request->isMethod('POST')) {
+        if ($client) {
             $this->setClientData($client, $request->request->all());
 
             $this->_em->persist($client);
@@ -78,5 +78,21 @@ class ClienteRepository extends ServiceEntityRepository
             ->setReprCod($data['reprCode'])
             ->setLimiteCredito($data['creditLimit'])
             ->setObservaciones($data['remarks']);
+    }
+
+    /**
+     * Deletes the client that matches with the id given by parameter.
+     *
+     * @param  number $id
+     * @return void
+     */
+    public function deleteClient($id)
+    {
+        $client = $this->find($id);
+
+        if ($client) {
+            $this->_em->remove($client);
+            $this->_em->flush();
+        }
     }
 }

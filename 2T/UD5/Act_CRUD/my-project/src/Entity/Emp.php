@@ -20,7 +20,7 @@ class Emp
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $oficio = null;
 
-    #[ORM\Column(type: Types::SMALLINT, nullable: true)]
+    #[ORM\Column(type: Types::INTEGER, nullable: true)]
     private ?int $jefe = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]

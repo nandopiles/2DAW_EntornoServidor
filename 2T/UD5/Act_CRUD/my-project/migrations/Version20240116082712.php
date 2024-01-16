@@ -21,7 +21,7 @@ final class Version20240116082712 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE cliente CHANGE cliente_cod cliente_cod INT AUTO_INCREMENT NOT NULL');
-        $this->addSql('ALTER TABLE emp CHANGE jefe jefe SMALLINT DEFAULT NULL');
+        $this->addSql('ALTER TABLE emp CHANGE jefe jefe INT DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
