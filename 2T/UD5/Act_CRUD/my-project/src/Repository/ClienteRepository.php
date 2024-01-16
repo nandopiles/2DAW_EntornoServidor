@@ -29,16 +29,12 @@ class ClienteRepository extends ServiceEntityRepository
      * @param  Request $request
      * @return void
      */
-    public function updateClient(int $id, Request $request): void
+    public function updateClient(Cliente $client, Request $request): void
     {
-        $client = $this->find($id);
+        $this->setClientData($client, $request->request->all());
 
-        if ($client) {
-            $this->setClientData($client, $request->request->all());
-
-            $this->_em->persist($client);
-            $this->_em->flush();
-        }
+        $this->_em->persist($client);
+        $this->_em->flush();
     }
 
     /**
@@ -88,10 +84,8 @@ class ClienteRepository extends ServiceEntityRepository
      * @param  number $id
      * @return void
      */
-    public function deleteClient($id)
+    public function deleteClient(Cliente $client)
     {
-        $client = $this->find($id);
-
         if ($client) {
             $this->_em->remove($client);
             $this->_em->flush();

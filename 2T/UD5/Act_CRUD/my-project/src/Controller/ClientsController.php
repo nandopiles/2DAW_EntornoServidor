@@ -44,12 +44,10 @@ class ClientsController extends AbstractController
      * @param  integer $id
      * @return Response
      */
-    #[Route('/client/detail/{id}', name: 'app_detailClient')]
-    public function showDetailClient(EntityManagerInterface $entityManager, int $id): Response
+    #[Route('/client/detail/{id}', name: 'app_detailClient')] // Fetches via primary key because {id} is in the route
+    public function showDetailClient(Cliente $clientSelected): Response
     {
-        $empRepository = $entityManager->getRepository(Emp::class);
-
-        $clientSelected = $this->getClientRepository()->find($id);
+        $empRepository = $this->getEntityManager()->getRepository(Emp::class);
 
         return $this->render('detail.html', [
             "client" => $clientSelected,
@@ -63,17 +61,17 @@ class ClientsController extends AbstractController
      * @param  integer $id
      * @return Response
      */
-    #[Route('/client/update/{id}', name: 'update_client')]
-    public function update(int $id, Request $request): Response
+    #[Route('/client/update/{id}', methods: ['POST'], name: 'update_client')]
+    public function update(Cliente $client, Request $request): Response
     {
         $empRepository = $this->getEntityManager()->getRepository(Emp::class);
 
         if ($request->isMethod('POST')) {
-            $this->getClientRepository()->updateClient($id, $request);
+            $this->getClientRepository()->updateClient($client, $request);
         }
 
         return $this->render("update.html", [
-            "client" => $this->getClientRepository()->find($id),
+            "client" => $client,
             "employees" => $empRepository->findAll()
         ]);
     }
@@ -83,18 +81,18 @@ class ClientsController extends AbstractController
      *
      * @return Response
      */
-    #[Route('/client/insert', methods: ['GET', 'POST'], name: 'insert_client')]
+    #[Route('/client/insert', methods: ['GET', 'POST'], name: 'insert_client')] // Only accepts GET and POST requests
     public function insert(Request $request): Response
     {
         $empRepository = $this->getEntityManager()->getRepository(Emp::class);
 
         $this->getClientRepository()->insertClient($request);
 
-        if ($request->isMethod('GET')) {
+        if ($request->isMethod('GET')) { // when the user click to the <a> link it will emit a GET request so u have to catch it here
             return $this->render("insert.html", [
                 "employees" => $empRepository->findAll()
             ]);
-        } else
+        } else // if it's not a GET request it will be a POST request so it will be displayed the clients list
             return $this->redirectToRoute('app_clients', [
                 "clients" => $this->getClientRepository()->findAll()
             ]);
@@ -107,9 +105,9 @@ class ClientsController extends AbstractController
      * @return void
      */
     #[Route('/client/delete/{id}', name: 'delete_client')]
-    public function delete($id): Response
+    public function delete(Cliente $client): Response
     {
-        $this->getClientRepository()->deleteClient($id);
+        $this->getClientRepository()->deleteClient($client);
 
         return $this->redirectToRoute('app_clients', [
             "clients" => $this->getClientRepository()->findAll()
