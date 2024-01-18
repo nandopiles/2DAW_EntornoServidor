@@ -66,9 +66,7 @@ class ClientsController extends AbstractController
     {
         $empRepository = $this->getEntityManager()->getRepository(Emp::class);
 
-        if ($request->isMethod('POST')) {
-            $this->getClientRepository()->updateClient($client, $request);
-        }
+        $this->getClientRepository()->updateClient($client, $request);
 
         return $this->render("update.html", [
             "client" => $client,

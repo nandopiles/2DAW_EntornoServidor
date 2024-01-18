@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EmpRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -11,8 +13,8 @@ class Emp
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $emp_no = null;
+    #[ORM\Column(name: "emp_no", type: "integer")]
+    private ?int $id = null;
 
     #[ORM\Column(length: 10)]
     private ?string $apellidos = null;
@@ -35,9 +37,17 @@ class Emp
     #[ORM\Column]
     private ?int $dept_no = null;
 
+    #[ORM\OneToMany(mappedBy: 'repr_cod', targetEntity: Cliente::class)]
+    private Collection $clientes;
+
+    public function __construct()
+    {
+        $this->clientes = new ArrayCollection();
+    }
+
     public function getEmp_no(): ?int
     {
-        return $this->emp_no;
+        return $this->id;
     }
 
     public function getApellidos(): ?string
@@ -120,6 +130,36 @@ class Emp
     public function setDeptNo(int $dept_no): static
     {
         $this->dept_no = $dept_no;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cliente>
+     */
+    public function getClientes(): Collection
+    {
+        return $this->clientes;
+    }
+
+    public function addCliente(Cliente $cliente): static
+    {
+        if (!$this->clientes->contains($cliente)) {
+            $this->clientes->add($cliente);
+            $cliente->setReprCod($cliente->getReprCod());
+        }
+
+        return $this;
+    }
+
+    public function removeCliente(Cliente $cliente): static
+    {
+        if ($this->clientes->removeElement($cliente)) {
+            // set the owning side to null (unless already changed)
+            if ($cliente->getReprCod() === $this) {
+                $cliente->setReprCod(null);
+            }
+        }
 
         return $this;
     }

@@ -11,8 +11,8 @@ class Cliente
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $cliente_cod = null;
+    #[ORM\Column(name: "cliente_cod", type: "integer")]
+    private ?int $id = null;
 
     #[ORM\Column(length: 45)]
     private ?string $nombre = null;
@@ -35,18 +35,18 @@ class Cliente
     #[ORM\Column(length: 9, nullable: true)]
     private ?string $telefono = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $repr_cod = null;
-
     #[ORM\Column(type: Types::DECIMAL, precision: 9, scale: 2, nullable: true)]
     private ?string $limite_credito = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $observaciones = null;
 
+    #[ORM\ManyToOne(inversedBy: 'clientes')]
+    private ?Emp $repr_cod = null;
+
     public function getCliente_cod(): ?int
     {
-        return $this->cliente_cod;
+        return $this->id;
     }
 
     public function getNombre(): ?string
