@@ -16,6 +16,7 @@ class Emp
     #[ORM\Column(name: "emp_no", type: "integer")]
     private ?int $id = null;
 
+
     #[ORM\Column(length: 10)]
     private ?string $apellidos = null;
 
@@ -40,12 +41,14 @@ class Emp
     #[ORM\OneToMany(mappedBy: 'repr_cod', targetEntity: Cliente::class)]
     private Collection $clientes;
 
+
+
     public function __construct()
     {
-        $this->clientes = new ArrayCollection();
+        //$this->clientes = new ArrayCollection();
     }
 
-    public function getEmp_no(): ?int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -146,7 +149,7 @@ class Emp
     {
         if (!$this->clientes->contains($cliente)) {
             $this->clientes->add($cliente);
-            $cliente->setReprCod($cliente->getReprCod());
+            $cliente->setReprCod($this);
         }
 
         return $this;

@@ -47,11 +47,9 @@ class ClientsController extends AbstractController
     #[Route('/client/detail/{id}', name: 'app_detailClient')] // Fetches via primary key because {id} is in the route
     public function showDetailClient(Cliente $clientSelected): Response
     {
-        $empRepository = $this->getEntityManager()->getRepository(Emp::class);
-
         return $this->render('detail.html', [
             "client" => $clientSelected,
-            "emp" => $empRepository->find($clientSelected->getReprCod())
+            "emp" => $clientSelected->getReprCod()
         ]);
     }
 

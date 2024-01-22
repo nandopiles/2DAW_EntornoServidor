@@ -16,12 +16,12 @@
     <tbody>
         {% for client in clients %}
         <tr>
-            <td><a href="/client/detail/{{ client.getCliente_cod() }}">{{
+            <td><a href="/client/detail/{{ client.getId() }}">{{
                     client.getNOMBRE() }}</a></td>
             <td>{{ client.getCIUDAD() }}</td>
             <td>
-                <a href="/client/update/{{ client.getCliente_cod() }}" class="edit">[U]</a>
-                <a href="/client/delete/{{ client.getCliente_cod() }}" class="delete">[X]</a>
+                <a href="/client/update/{{ client.getId() }}" class="edit">[U]</a>
+                <a href="/client/delete/{{ client.getId() }}" class="delete">[X]</a>
             </td>
         </tr>
         {% endfor %}

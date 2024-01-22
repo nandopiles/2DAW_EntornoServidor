@@ -41,10 +41,12 @@ class Cliente
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $observaciones = null;
 
-    #[ORM\ManyToOne(inversedBy: 'clientes')]
+    #[ORM\ManyToOne(targetEntity: Emp::class, inversedBy: 'clientes')]
+    #[ORM\JoinColumn(name: "emp_no", referencedColumnName: "emp_no")]
     private ?Emp $repr_cod = null;
 
-    public function getCliente_cod(): ?int
+
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -133,17 +135,6 @@ class Cliente
         return $this;
     }
 
-    public function getReprCod(): ?int
-    {
-        return $this->repr_cod;
-    }
-
-    public function setReprCod(?int $repr_cod): static
-    {
-        $this->repr_cod = $repr_cod;
-
-        return $this;
-    }
 
     public function getLimiteCredito(): ?string
     {
@@ -165,6 +156,18 @@ class Cliente
     public function setObservaciones(?string $observaciones): static
     {
         $this->observaciones = $observaciones;
+
+        return $this;
+    }
+
+    public function getReprCod(): ?Emp
+    {
+        return $this->repr_cod;
+    }
+
+    public function setReprCod(?Emp $repr_cod): static
+    {
+        $this->repr_cod = $repr_cod;
 
         return $this;
     }
