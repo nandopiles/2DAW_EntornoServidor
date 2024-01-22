@@ -3,13 +3,13 @@
 {% block content %}
 
 <div id="form_container">
-    <form method="post" action="/client/update/{{ client.getCliente_cod() }}">
+    <form method="post" action="/client/update/{{ client.getId() }}">
         <div>
             <h2>Update {{ client.getNombre() }} Client</h2>
         </div>
         <label for="clientCode">Client Code</label>
         <div>
-            <input name="clientCode" type="number" size="5" value="{{ client.getCliente_cod() }}" disabled />
+            <input name="clientCode" type="number" size="5" value="{{ client.getId() }}" disabled />
         </div>
 
         <label for="name">Name</label>
@@ -51,8 +51,7 @@
         <div>
             <select name="reprCode">
                 {% for emp in employees %}
-                <option value="{{ emp.getEmp_no() }}" {% if emp.getEmp_no()==client.getReprCod() %} selected {% endif
-                    %}>
+                <option value="{{emp.getId()}}" {% if emp.getId()==client.getReprCod().getId() %} selected {% endif %}>
                     {{ emp.getApellidos() }}</option>
                 {% endfor %}
             </select>

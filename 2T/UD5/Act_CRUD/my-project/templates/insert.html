@@ -47,8 +47,8 @@
 		<div>
 			<select name="reprCode">
 				{% for emp in employees %}
-				<option value="{{ emp.getEmp_no() }}">
-					{{ emp.getAPELLIDOS() }}</option>
+				<option value="{{ emp.getId() }}">
+					{{ emp.getApellidos() }}</option>
 				{% endfor %}
 			</select>
 		</div>

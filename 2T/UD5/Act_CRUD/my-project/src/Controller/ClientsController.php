@@ -59,12 +59,13 @@ class ClientsController extends AbstractController
      * @param  integer $id
      * @return Response
      */
-    #[Route('/client/update/{id}', methods: ['POST'], name: 'update_client')]
+    #[Route('/client/update/{id}', methods: ['GET', 'POST'], name: 'update_client')]
     public function update(Cliente $client, Request $request): Response
     {
         $empRepository = $this->getEntityManager()->getRepository(Emp::class);
 
-        $this->getClientRepository()->updateClient($client, $request);
+        if ($request->isMethod('POST'))
+            $this->getClientRepository()->updateClient($client, $request, $this->getEntityManager());
 
         return $this->render("update.html", [
             "client" => $client,
@@ -80,18 +81,19 @@ class ClientsController extends AbstractController
     #[Route('/client/insert', methods: ['GET', 'POST'], name: 'insert_client')] // Only accepts GET and POST requests
     public function insert(Request $request): Response
     {
-        $empRepository = $this->getEntityManager()->getRepository(Emp::class);
-
-        $this->getClientRepository()->insertClient($request);
-
         if ($request->isMethod('GET')) { // when the user click to the <a> link it will emit a GET request so u have to catch it here
+            $empRepository = $this->getEntityManager()->getRepository(Emp::class);
+
             return $this->render("insert.html", [
                 "employees" => $empRepository->findAll()
             ]);
-        } else // if it's not a GET request it will be a POST request so it will be displayed the clients list
+        } else if ($request->isMethod('POST')) { // if it's a POST request it will be displayed the clients list
+            $this->getClientRepository()->insertClient($request, $this->getEntityManager());
+
             return $this->redirectToRoute('app_clients', [
                 "clients" => $this->getClientRepository()->findAll()
             ]);
+        }
     }
 
     /**

@@ -21,28 +21,14 @@ class EmpRepository extends ServiceEntityRepository
         parent::__construct($registry, Emp::class);
     }
 
-//    /**
-//     * @return Emp[] Returns an array of Emp objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Emp
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    /**
+     * Finds an Emp by his id.
+     *
+     * @param  int $empId
+     * @return Emp
+     */
+    public function findEmpById(int $empId): ?Emp
+    {
+        return $this->find($empId);
+    }
 }

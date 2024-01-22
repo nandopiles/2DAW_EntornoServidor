@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Cliente;
+use App\Entity\Emp;
+use App\Repository\EmpRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -29,9 +32,9 @@ class ClienteRepository extends ServiceEntityRepository
      * @param  Request $request
      * @return void
      */
-    public function updateClient(Cliente $client, Request $request): void
+    public function updateClient(Cliente $client, Request $request, EntityManagerInterface $entityManager): void
     {
-        $this->setClientData($client, $request->request->all());
+        $this->setClientData($client, $request->request->all(), $entityManager);
 
         $this->_em->persist($client);
         $this->_em->flush();
@@ -42,19 +45,15 @@ class ClienteRepository extends ServiceEntityRepository
      *
      * @return void 
      */
-    public function insertClient(Request $request)
+    public function insertClient(Request $request, EntityManagerInterface $entityManager)
     {
-        if ($request->isMethod('POST')) {
-            $newClient = new Cliente();
+        $newClient = new Cliente();
 
-            $this->setClientData($newClient, $request->request->all());
+        $this->setClientData($newClient, $request->request->all(), $entityManager);
 
-            $this->_em->persist($newClient);
-            $this->_em->flush();
-        }
+        $this->_em->persist($newClient);
+        $this->_em->flush();
     }
-
-    // do the assets with CSS
 
     /**
      * Sets all the data specified on the post signal in the client specified.
@@ -63,8 +62,10 @@ class ClienteRepository extends ServiceEntityRepository
      * @param  array $data
      * @return void
      */
-    public function setClientData(Cliente $client, array $data): void
+    public function setClientData(Cliente $client, array $data, EntityManagerInterface $entityManager): void
     {
+        $empRepository = $entityManager->getRepository(Emp::class);
+
         $client
             ->setNombre($data['name'])
             ->setDirec($data['address'])
@@ -73,7 +74,7 @@ class ClienteRepository extends ServiceEntityRepository
             ->setCodPostal($data['zipCode'])
             ->setArea($data['area'])
             ->setTelefono($data['phone'])
-            ->setReprCod($data['reprCode'])
+            ->setReprCod($empRepository->findEmpById($data['reprCode']))
             ->setLimiteCredito($data['creditLimit'])
             ->setObservaciones($data['remarks']);
     }
