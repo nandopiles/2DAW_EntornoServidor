@@ -35,18 +35,14 @@ class Emp
     #[ORM\Column(nullable: true)]
     private ?int $comision = null;
 
-    #[ORM\Column]
-    private ?int $dept_no = null;
 
     #[ORM\OneToMany(mappedBy: 'repr_cod', targetEntity: Cliente::class)]
     private Collection $clientes;
 
+    #[ORM\ManyToOne(targetEntity: Dept::class, inversedBy: 'emps')]
+    #[ORM\JoinColumn(name: "dept_no", referencedColumnName: "dept_no")]
+    private ?Dept $dept_no = null;
 
-
-    public function __construct()
-    {
-        //$this->clientes = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
