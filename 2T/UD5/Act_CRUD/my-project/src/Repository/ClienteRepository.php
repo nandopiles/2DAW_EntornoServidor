@@ -3,8 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Cliente;
-use App\Entity\Emp;
-use App\Repository\EmpRepository;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -32,9 +30,9 @@ class ClienteRepository extends ServiceEntityRepository
      * @param  Request $request
      * @return void
      */
-    public function updateClient(Cliente $client, Request $request, EntityManagerInterface $entityManager): void
+    public function updateClient(Cliente $client, Cliente $newDataClient): void
     {
-        $this->setClientData($client, $request->request->all(), $entityManager);
+        $this->setClientData($client, $newDataClient);
 
         $this->_em->persist($client);
         $this->_em->flush();
@@ -45,11 +43,11 @@ class ClienteRepository extends ServiceEntityRepository
      *
      * @return void 
      */
-    public function insertClient(Request $request, EntityManagerInterface $entityManager)
+    public function insertClient(Cliente $newDataClient)
     {
         $newClient = new Cliente();
 
-        $this->setClientData($newClient, $request->request->all(), $entityManager);
+        $this->setClientData($newClient, $newDataClient);
 
         $this->_em->persist($newClient);
         $this->_em->flush();
@@ -62,21 +60,9 @@ class ClienteRepository extends ServiceEntityRepository
      * @param  array $data
      * @return void
      */
-    public function setClientData(Cliente $client, array $data, EntityManagerInterface $entityManager): void
+    public function setClientData(Cliente $client, Cliente $newDataClient): void
     {
-        $empRepository = $entityManager->getRepository(Emp::class);
-
-        $client
-            ->setNombre($data['name'])
-            ->setDirec($data['address'])
-            ->setCiudad($data['city'])
-            ->setEstado($data['state'])
-            ->setCodPostal($data['zipCode'])
-            ->setArea($data['area'])
-            ->setTelefono($data['phone'])
-            ->setReprCod($empRepository->findEmpById($data['reprCode']))
-            ->setLimiteCredito($data['creditLimit'])
-            ->setObservaciones($data['remarks']);
+        $client = $newDataClient;
     }
 
     /**

@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Cliente;
 use App\Entity\Emp;
+use App\Form\ClienteType;
+use App\Form\UpdateType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,12 +66,18 @@ class ClientsController extends AbstractController
     {
         $empRepository = $this->getEntityManager()->getRepository(Emp::class);
 
-        if ($request->isMethod('POST'))
-            $this->getClientRepository()->updateClient($client, $request, $this->getEntityManager());
+        $myForm = $this->createForm(ClienteType::class, $client);
+        $myForm->handleRequest($request);
+
+        if ($request->isMethod('POST') && $myForm->isSubmitted() && $myForm->isValid()) {
+            $data = $myForm->getData();
+            $this->getClientRepository()->updateClient($client, $data);
+        }
 
         return $this->render("update.html", [
             "client" => $client,
-            "employees" => $empRepository->findAll()
+            "employees" => $empRepository->findAll(),
+            'updateForm' => $myForm->createView()
         ]);
     }
 
@@ -83,12 +91,14 @@ class ClientsController extends AbstractController
     {
         if ($request->isMethod('GET')) { // when the user click to the <a> link it will emit a GET request so u have to catch it here
             $empRepository = $this->getEntityManager()->getRepository(Emp::class);
+            $myForm = $this->createForm(ClienteType::class);
+            $myForm->handleRequest($request);
 
             return $this->render("insert.html", [
                 "employees" => $empRepository->findAll()
             ]);
         } else if ($request->isMethod('POST')) { // if it's a POST request it will be displayed the clients list
-            $this->getClientRepository()->insertClient($request, $this->getEntityManager());
+            $this->getClientRepository()->insertClient($request);
 
             return $this->redirectToRoute('app_clients', [
                 "clients" => $this->getClientRepository()->findAll()

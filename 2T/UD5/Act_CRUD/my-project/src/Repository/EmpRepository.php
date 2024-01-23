@@ -20,15 +20,4 @@ class EmpRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Emp::class);
     }
-
-    /**
-     * Finds an Emp by his id.
-     *
-     * @param  int $empId
-     * @return Emp
-     */
-    public function findEmpById(int $empId): ?Emp
-    {
-        return $this->find($empId);
-    }
 }

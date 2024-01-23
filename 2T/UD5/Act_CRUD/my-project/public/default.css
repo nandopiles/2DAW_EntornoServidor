@@ -44,7 +44,7 @@ textarea {
 	box-sizing: border-box;
 }
 
-input[type="submit"] {
+.submit {
 	background-color: #fff;
 	color: #000;
 	border: 1px solid #e1e1e1;
@@ -54,7 +54,7 @@ input[type="submit"] {
 	cursor: pointer;
 }
 
-input[type="submit"]:hover {
+.submit:hover {
 	background-color: #e1e1e1;
 }
 
