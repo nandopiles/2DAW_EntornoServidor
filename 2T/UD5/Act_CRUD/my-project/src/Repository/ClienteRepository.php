@@ -32,7 +32,7 @@ class ClienteRepository extends ServiceEntityRepository
      */
     public function updateClient(Cliente $client, Cliente $newDataClient): void
     {
-        $this->setClientData($client, $newDataClient);
+        $client = $newDataClient;
 
         $this->_em->persist($client);
         $this->_em->flush();
@@ -47,22 +47,10 @@ class ClienteRepository extends ServiceEntityRepository
     {
         $newClient = new Cliente();
 
-        $this->setClientData($newClient, $newDataClient);
+        $newClient = $newDataClient;
 
         $this->_em->persist($newClient);
         $this->_em->flush();
-    }
-
-    /**
-     * Sets all the data specified on the post signal in the client specified.
-     *
-     * @param  Client $client
-     * @param  array $data
-     * @return void
-     */
-    public function setClientData(Cliente $client, Cliente $newDataClient): void
-    {
-        $client = $newDataClient;
     }
 
     /**

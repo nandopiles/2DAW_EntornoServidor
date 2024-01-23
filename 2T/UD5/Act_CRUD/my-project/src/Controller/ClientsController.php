@@ -89,21 +89,26 @@ class ClientsController extends AbstractController
     #[Route('/client/insert', methods: ['GET', 'POST'], name: 'insert_client')] // Only accepts GET and POST requests
     public function insert(Request $request): Response
     {
-        if ($request->isMethod('GET')) { // when the user click to the <a> link it will emit a GET request so u have to catch it here
-            $empRepository = $this->getEntityManager()->getRepository(Emp::class);
-            $myForm = $this->createForm(ClienteType::class);
-            $myForm->handleRequest($request);
+        $myForm = $this->createForm(ClienteType::class);
+        $myForm->handleRequest($request);
 
-            return $this->render("insert.html", [
-                "employees" => $empRepository->findAll()
-            ]);
-        } else if ($request->isMethod('POST')) { // if it's a POST request it will be displayed the clients list
-            $this->getClientRepository()->insertClient($request);
+        if ($myForm->isSubmitted() && $myForm->isValid()) {
+            // If it's POST it will insert the new client.
+            $data = $myForm->getData();
+            $this->getClientRepository()->insertClient($data);
 
             return $this->redirectToRoute('app_clients', [
                 "clients" => $this->getClientRepository()->findAll()
             ]);
         }
+
+        // If it's GET it will display the "insert" template.
+        $empRepository = $this->getEntityManager()->getRepository(Emp::class);
+
+        return $this->render("insert.html", [
+            "employees" => $empRepository->findAll(),
+            'insertForm' => $myForm->createView()
+        ]);
     }
 
     /**
