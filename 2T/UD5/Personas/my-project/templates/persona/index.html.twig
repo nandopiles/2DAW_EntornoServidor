@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}List Personas{% endblock %}
+
+{% block body %}
+<h2>Clients Table</h2>
+<a href="/persona/insert" class="edit">[Insert]</a>
+
+<table class="custom-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for persona in personas %}
+        <tr>
+            <td>{{persona.getNombres() }}</td>
+            <td>
+                <a href="/persona/update/{{ persona.getId() }}" class="edit">[U]</a>
+                <a href="/persona/delete/{{ persona.getId() }}" class="delete">[X]</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
