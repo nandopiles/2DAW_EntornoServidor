@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Persona;
+use App\Form\PersonaType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,7 +26,7 @@ class PersonaController extends AbstractController
     {
         $personas = $this->getPersonaRepository()->findAll();
 
-        return $this->render('persona/index.html.twig', [
+        return $this->render("persona/index.html.twig", [
             "personas" => $personas
         ]);
     }
