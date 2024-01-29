@@ -2,15 +2,43 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Product;
+use App\Form\ProductType;
 use Doctrine\Common\Collections\Expr\Value;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Form\ChoiceList\EntityLoaderInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends AbstractController
 {
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    #[Route('/', name: 'app_form')]
+    public function form(Request $request): Response
+    {
+        $producto = new Product();
+        $myForm = $this->createForm(ProductType::class, $producto);
+        $myForm->handleRequest($request);
+        if ($myForm->isSubmitted() && $myForm->isValid()) {
+            $this->entityManager->persist($producto);
+            $this->entityManager->flush();
+            return $this->redirectToRoute('app_form');
+        }
+
+        return $this->render('base.html.twig', [
+            'myForm' => $myForm->createView()
+        ]);
+    }
+
     #[Route('/product', name: 'app_product')]
     public function index(): Response
     {
@@ -97,5 +125,30 @@ class ProductController extends AbstractController
         return $this->redirectToRoute('product_show', [
             'id' => $product->getId()
         ]);
+    }
+
+
+    #[Route('/rel', name: 'product_rel')]
+    public function rel(EntityManagerInterface $entityManager): Response
+    {
+        $category = new Category();
+        $category->setName('Computer Peripherals');
+
+        $product = new Product();
+        $product->setName('Keyboard');
+        $product->setPrice(19.99);
+        $product->setDescription('Ergonomic and stylish!');
+
+        // relates this product to the category
+        $product->setCategory($category);
+
+        $entityManager->persist($category);
+        $entityManager->persist($product);
+        $entityManager->flush();
+
+        return new Response(
+            'Saved new product with id: ' . $product->getId()
+                . ' and new category with id: ' . $category->getId()
+        );
     }
 }
