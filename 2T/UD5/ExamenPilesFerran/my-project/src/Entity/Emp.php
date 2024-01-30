@@ -33,14 +33,17 @@ class Emp
     #[ORM\Column(nullable: true)]
     private ?int $comision = null;
 
-    #[ORM\Column]
-    private ?int $dept_no = null;
-
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $fecha_alta = null;
 
     #[ORM\OneToMany(mappedBy: 'repr_cod', targetEntity: Cliente::class)]
     private Collection $clientes;
+
+    #[ORM\ManyToOne(targetEntity: Dept::class, inversedBy: 'emps')]
+    #[ORM\JoinColumn(name: "dept_no", referencedColumnName: "dept_no", nullable: false)]
+    private ?Dept $dept_no = null;
+
+
 
     public function __construct()
     {
@@ -112,18 +115,6 @@ class Emp
         return $this;
     }
 
-    public function getDeptNo(): ?int
-    {
-        return $this->dept_no;
-    }
-
-    public function setDeptNo(int $dept_no): static
-    {
-        $this->dept_no = $dept_no;
-
-        return $this;
-    }
-
     public function getFechaAlta(): ?\DateTimeInterface
     {
         return $this->fecha_alta;
@@ -162,6 +153,18 @@ class Emp
                 $cliente->setReprCod(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDeptNo(): ?Dept
+    {
+        return $this->dept_no;
+    }
+
+    public function setDeptNo(?Dept $dept_no): static
+    {
+        $this->dept_no = $dept_no;
 
         return $this;
     }
