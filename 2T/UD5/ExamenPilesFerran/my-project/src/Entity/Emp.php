@@ -39,8 +39,12 @@ class Emp
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $fecha_alta = null;
 
+    #[ORM\OneToMany(mappedBy: 'repr_cod', targetEntity: Cliente::class)]
+    private Collection $clientes;
+
     public function __construct()
     {
+        $this->clientes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -128,6 +132,36 @@ class Emp
     public function setFechaAlta(?\DateTimeInterface $fecha_alta): static
     {
         $this->fecha_alta = $fecha_alta;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cliente>
+     */
+    public function getClientes(): Collection
+    {
+        return $this->clientes;
+    }
+
+    public function addCliente(Cliente $cliente): static
+    {
+        if (!$this->clientes->contains($cliente)) {
+            $this->clientes->add($cliente);
+            $cliente->setReprCod($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCliente(Cliente $cliente): static
+    {
+        if ($this->clientes->removeElement($cliente)) {
+            // set the owning side to null (unless already changed)
+            if ($cliente->getReprCod() === $this) {
+                $cliente->setReprCod(null);
+            }
+        }
 
         return $this;
     }

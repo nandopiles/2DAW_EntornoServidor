@@ -41,8 +41,9 @@ class Cliente
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $observaciones = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?int $repr_cod = null;
+    #[ORM\ManyToOne(targetEntity: Emp::class, inversedBy: 'clientes')]
+    #[ORM\JoinColumn(name: "repr_cod", referencedColumnName: "emp_no")]
+    private ?Emp $repr_cod = null;
 
     public function getId(): ?int
     {
@@ -157,12 +158,12 @@ class Cliente
         return $this;
     }
 
-    public function getReprCod(): ?int
+    public function getReprCod(): ?Emp
     {
         return $this->repr_cod;
     }
 
-    public function setReprCod(int $repr_cod): static
+    public function setReprCod(?Emp $repr_cod): static
     {
         $this->repr_cod = $repr_cod;
 
