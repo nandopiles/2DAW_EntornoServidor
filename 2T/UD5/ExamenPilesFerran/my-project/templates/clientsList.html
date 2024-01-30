@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Clients Table</h2>
+<a href="/client/insert" class="edit">[Insert]</a>
+
+<table class="custom-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>City</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in clients %}
+        <tr>
+            <td><a href="/client/detail/{{ client.getId() }}">{{
+                    client.getNOMBRE() }}</a></td>
+            <td>{{ client.getCIUDAD() }}</td>
+            <td>
+                <a href="/client/update/{{ client.getId() }}" class="edit">[U]</a>
+                <a href="/client/delete/{{ client.getId() }}" class="delete">[X]</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br><br><br>
+{% endblock %}
