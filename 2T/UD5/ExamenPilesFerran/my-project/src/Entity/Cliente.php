@@ -41,6 +41,9 @@ class Cliente
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $observaciones = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $repr_cod = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,6 +153,18 @@ class Cliente
     public function setObservaciones(?string $observaciones): static
     {
         $this->observaciones = $observaciones;
+
+        return $this;
+    }
+
+    public function getReprCod(): ?int
+    {
+        return $this->repr_cod;
+    }
+
+    public function setReprCod(int $repr_cod): static
+    {
+        $this->repr_cod = $repr_cod;
 
         return $this;
     }

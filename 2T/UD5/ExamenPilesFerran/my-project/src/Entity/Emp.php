@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\EmpRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,11 +28,20 @@ class Emp
     #[ORM\Column(nullable: true)]
     private ?int $salario = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $fehca_alta = null;
+
 
     #[ORM\Column(nullable: true)]
     private ?int $comision = null;
+
+    #[ORM\Column]
+    private ?int $dept_no = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $fecha_alta = null;
+
+    public function __construct()
+    {
+    }
 
     public function getId(): ?int
     {
@@ -85,18 +96,6 @@ class Emp
         return $this;
     }
 
-    public function getFehcaAlta(): ?\DateTimeInterface
-    {
-        return $this->fehca_alta;
-    }
-
-    public function setFehcaAlta(?\DateTimeInterface $fehca_alta): static
-    {
-        $this->fehca_alta = $fehca_alta;
-
-        return $this;
-    }
-
     public function getComision(): ?int
     {
         return $this->comision;
@@ -105,6 +104,30 @@ class Emp
     public function setComision(?int $comision): static
     {
         $this->comision = $comision;
+
+        return $this;
+    }
+
+    public function getDeptNo(): ?int
+    {
+        return $this->dept_no;
+    }
+
+    public function setDeptNo(int $dept_no): static
+    {
+        $this->dept_no = $dept_no;
+
+        return $this;
+    }
+
+    public function getFechaAlta(): ?\DateTimeInterface
+    {
+        return $this->fecha_alta;
+    }
+
+    public function setFechaAlta(?\DateTimeInterface $fecha_alta): static
+    {
+        $this->fecha_alta = $fecha_alta;
 
         return $this;
     }
