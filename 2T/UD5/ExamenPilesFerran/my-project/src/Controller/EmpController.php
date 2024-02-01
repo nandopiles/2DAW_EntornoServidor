@@ -11,15 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ClientsController extends AbstractController
+class EmpController extends AbstractController
 {
     protected $entityManager;
-    protected $clientRepository;
+    protected $empRepository;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->setClientRepository($this->getEntityManager()->getRepository(Cliente::class));
+        $this->setEmpRepository($this->getEntityManager()->getRepository(Emp::class));
     }
 
     /**
@@ -28,13 +28,13 @@ class ClientsController extends AbstractController
      * @param  EntityManagerInterface $entityManager
      * @return Response
      */
-    #[Route('/client/list', name: 'app_clients')]
-    public function listClients(): Response
+    #[Route('/emp/list', name: 'app_emps')]
+    public function listEmps(): Response
     {
-        $clients = $this->getClientRepository()->findAll();
+        $emps = $this->getEmpRepository()->findAll();
 
-        return $this->render('clients/clientsList.html', [
-            "clients" => $clients
+        return $this->render('emp/empList.html', [
+            "emps" => $emps
         ]);
     }
 
@@ -45,10 +45,10 @@ class ClientsController extends AbstractController
      * @param  integer $id
      * @return Response
      */
-    #[Route('/client/detail/{id}', name: 'app_detailClient')] // Fetches via primary key because {id} is in the route
+    #[Route('/emp/detail/{id}', name: 'app_detailEmp')] // Fetches via primary key because {id} is in the route
     public function showDetailClient(Cliente $clientSelected): Response
     {
-        return $this->render('clients/detail.html', [
+        return $this->render('detail.html', [
             "client" => $clientSelected,
             "emp" => $clientSelected->getReprCod()
         ]);
@@ -60,13 +60,13 @@ class ClientsController extends AbstractController
      * @param  integer $id
      * @return Response
      */
-    #[Route('/client/update/{id}', methods: ['GET'], name: 'update_form_client')]
+    #[Route('/emp/update/{id}', methods: ['GET'], name: 'update_form_emp')]
     public function displayUpdateForm(Cliente $client, Request $request): Response
     {
         $myForm = $this->createForm(ClienteType::class, $client);
         $myForm->handleRequest($request);
 
-        return $this->render("clients/update.html", [
+        return $this->render("update.html", [
             "client" => $client,
             'updateForm' => $myForm->createView()
         ]);
@@ -78,16 +78,16 @@ class ClientsController extends AbstractController
      * @param  integer $id
      * @return Response
      */
-    #[Route('/client/update/{id}', methods: ['POST'], name: 'update_client')]
+    #[Route('/emp/update/{id}', methods: ['POST'], name: 'update_emp')]
     public function update(Cliente $client, Request $request): Response
     {
         $myForm = $this->createForm(ClienteType::class, $client);
         $myForm->handleRequest($request);
 
         $data = $myForm->getData();
-        $this->getClientRepository()->updateClient($client, $data);
+        $this->getEmpRepository()->updateClient($client, $data);
 
-        return $this->render("clients/update.html", [
+        return $this->render("update.html", [
             "client" => $client,
             'updateForm' => $myForm->createView()
         ]);
@@ -99,7 +99,7 @@ class ClientsController extends AbstractController
      * @param  mixed $request
      * @return Response
      */
-    #[Route('/client/insert', methods: ['GET'], name: 'insert_form_client')]
+    #[Route('/emp/insert', methods: ['GET'], name: 'insert_form_emp')]
     public function displayInsertForm(Request $request): Response
     {
         $myForm = $this->createForm(ClienteType::class);
@@ -108,7 +108,7 @@ class ClientsController extends AbstractController
         // If it's GET it will display the "insert" template.
         $empRepository = $this->getEntityManager()->getRepository(Emp::class);
 
-        return $this->render("clients/insert.html", [
+        return $this->render("insert.html", [
             "employees" => $empRepository->findAll(),
             'insertForm' => $myForm->createView()
         ]);
@@ -119,7 +119,7 @@ class ClientsController extends AbstractController
      *
      * @return Response
      */
-    #[Route('/client/insert', methods: ['POST'], name: 'insert_client')]
+    #[Route('/emp/insert', methods: ['POST'], name: 'insert_emp')]
     public function insert(Request $request): Response
     {
         $myForm = $this->createForm(ClienteType::class);
@@ -127,10 +127,10 @@ class ClientsController extends AbstractController
 
         // If it's POST it will insert the new client.
         $data = $myForm->getData();
-        $this->getClientRepository()->insertClient($data);
+        $this->getEmpRepository()->insertClient($data);
 
         return $this->redirectToRoute('app_clients', [
-            "clients" => $this->getClientRepository()->findAll()
+            "clients" => $this->getEmpRepository()->findAll()
         ]);
     }
 
@@ -140,15 +140,15 @@ class ClientsController extends AbstractController
      * @param  number $id
      * @return void
      */
-    #[Route('/client/delete/{id}', name: 'delete_client')]
+    #[Route('/emp/delete/{id}', name: 'delete_emp')]
     public function delete(Cliente $client): Response
     {
         if ($client) {
-            $this->getClientRepository()->deleteClient($client);
+            $this->getEmpRepository()->deleteClient($client);
         }
 
         return $this->redirectToRoute('app_clients', [
-            "clients" => $this->getClientRepository()->findAll()
+            "clients" => $this->getEmpRepository()->findAll()
         ]);
     }
 
@@ -173,21 +173,21 @@ class ClientsController extends AbstractController
     }
 
     /**
-     * Get the value of clientRepository
+     * Get the value of empRepository
      */
-    public function getClientRepository()
+    public function getEmpRepository()
     {
-        return $this->clientRepository;
+        return $this->empRepository;
     }
 
     /**
-     * Set the value of clientRepository
+     * Set the value of empRepository
      *
      * @return  self
      */
-    public function setClientRepository($clientRepository)
+    public function setEmpRepository($empRepository)
     {
-        $this->clientRepository = $clientRepository;
+        $this->empRepository = $empRepository;
 
         return $this;
     }

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<h2>Emps Table</h2>
+<a href="/emp/insert" class="edit">[Insert]</a>
+
+<table class="custom-table">
+    <thead>
+        <tr>
+            <th>Surnames</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for emp in emps %}
+        <tr>
+            <td><a href="/emp/detail/{{ emp.getId() }}">{{
+                    emp.getApellidos() }}</a></td>
+            <td>
+                <a href="/emp/update/{{ emp.getId() }}" class="edit">[U]</a>
+                <a href="/emp/delete/{{ emp.getId() }}" class="delete">[X]</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br><br><br>
+{% endblock %}
