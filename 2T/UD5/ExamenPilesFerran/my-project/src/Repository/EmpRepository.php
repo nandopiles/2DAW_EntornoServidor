@@ -21,28 +21,18 @@ class EmpRepository extends ServiceEntityRepository
         parent::__construct($registry, Emp::class);
     }
 
-//    /**
-//     * @return Emp[] Returns an array of Emp objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('e.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * Updates the client with the given id with the new data obtained by the form into the database.
+     *
+     * @param  integer $id
+     * @param  Request $request
+     * @return void
+     */
+    public function updateEmp(Emp $emp, Emp $newDataEmp): void
+    {
+        $emp = $newDataEmp;
 
-//    public function findOneBySomeField($value): ?Emp
-//    {
-//        return $this->createQueryBuilder('e')
-//            ->andWhere('e.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        $this->_em->persist($emp);
+        $this->_em->flush();
+    }
 }

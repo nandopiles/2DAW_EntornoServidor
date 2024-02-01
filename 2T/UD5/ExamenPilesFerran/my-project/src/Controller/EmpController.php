@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Cliente;
 use App\Entity\Emp;
 use App\Form\ClienteType;
+use App\Form\EmpType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -60,13 +61,13 @@ class EmpController extends AbstractController
      * @return Response
      */
     #[Route('/emp/update/{id}', methods: ['GET'], name: 'update_form_emp')]
-    public function displayUpdateForm(Cliente $client, Request $request): Response
+    public function displayUpdateForm(Emp $emp, Request $request): Response
     {
-        $myForm = $this->createForm(ClienteType::class, $client);
+        $myForm = $this->createForm(EmpType::class, $emp);
         $myForm->handleRequest($request);
 
-        return $this->render("update.html", [
-            "client" => $client,
+        return $this->render("/emp/update.html", [
+            "emp" => $emp,
             'updateForm' => $myForm->createView()
         ]);
     }
@@ -78,16 +79,16 @@ class EmpController extends AbstractController
      * @return Response
      */
     #[Route('/emp/update/{id}', methods: ['POST'], name: 'update_emp')]
-    public function update(Cliente $client, Request $request): Response
+    public function update(Emp $emp, Request $request): Response
     {
-        $myForm = $this->createForm(ClienteType::class, $client);
+        $myForm = $this->createForm(EmpType::class, $emp);
         $myForm->handleRequest($request);
 
         $data = $myForm->getData();
-        $this->getEmpRepository()->updateClient($client, $data);
+        $this->getEmpRepository()->updateEmp($emp, $data);
 
-        return $this->render("update.html", [
-            "client" => $client,
+        return $this->render("/emp/update.html", [
+            "client" => $emp,
             'updateForm' => $myForm->createView()
         ]);
     }
