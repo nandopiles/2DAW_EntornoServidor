@@ -24,7 +24,7 @@ class EmpController extends AbstractController
     }
 
     /**
-     * Displays all the clients saved in the database.
+     * Displays all the emps saved in the database.
      *
      * @param  EntityManagerInterface $entityManager
      * @return Response
@@ -40,7 +40,7 @@ class EmpController extends AbstractController
     }
 
     /**
-     * Shows all the info related to the client selected.
+     * Shows all the info related to the emp selected.
      *
      * @param  EntityManagerInterface $entityManager
      * @param  integer $id
@@ -55,7 +55,7 @@ class EmpController extends AbstractController
     }
 
     /**
-     * Updates a client by its id.
+     * Updates a emp by its id.
      *
      * @param  integer $id
      * @return Response
@@ -63,17 +63,16 @@ class EmpController extends AbstractController
     #[Route('/emp/update/{id}', methods: ['GET'], name: 'update_form_emp')]
     public function displayUpdateForm(Emp $emp, Request $request): Response
     {
-        $myForm = $this->createForm(EmpType::class, $emp);
+        $myForm = $this->createForm(EmpType::class, $emp); // I pass by parameter the Emp's info to fill the form
         $myForm->handleRequest($request);
 
         return $this->render("/emp/update.html", [
-            "emp" => $emp,
             'updateForm' => $myForm->createView()
         ]);
     }
 
     /**
-     * Updates a client by its id.
+     * Updates a emp.
      *
      * @param  integer $id
      * @return Response
@@ -88,13 +87,12 @@ class EmpController extends AbstractController
         $this->getEmpRepository()->updateEmp($emp, $data);
 
         return $this->render("/emp/update.html", [
-            "client" => $emp,
             'updateForm' => $myForm->createView()
         ]);
     }
 
     /**
-     * Displays the insert form to fill the info of the new Client to add.
+     * Displays the insert form to fill the info of the new Emp to add.
      *
      * @param  mixed $request
      * @return Response
@@ -102,20 +100,16 @@ class EmpController extends AbstractController
     #[Route('/emp/insert', methods: ['GET'], name: 'insert_form_emp')]
     public function displayInsertForm(Request $request): Response
     {
-        $myForm = $this->createForm(ClienteType::class);
+        $myForm = $this->createForm(EmpType::class);
         $myForm->handleRequest($request);
 
-        // If it's GET it will display the "insert" template.
-        $empRepository = $this->getEntityManager()->getRepository(Emp::class);
-
-        return $this->render("insert.html", [
-            "employees" => $empRepository->findAll(),
+        return $this->render("/emp/insert.html", [
             'insertForm' => $myForm->createView()
         ]);
     }
 
     /**
-     * Inserts a new client.
+     * Inserts a new emp.
      *
      * @return Response
      */
@@ -125,11 +119,10 @@ class EmpController extends AbstractController
         $myForm = $this->createForm(ClienteType::class);
         $myForm->handleRequest($request);
 
-        // If it's POST it will insert the new client.
         $data = $myForm->getData();
-        $this->getEmpRepository()->insertClient($data);
+        $this->getEmpRepository()->insertEmp($data);
 
-        return $this->redirectToRoute('app_clients', [
+        return $this->redirectToRoute('app_emps', [
             "clients" => $this->getEmpRepository()->findAll()
         ]);
     }
@@ -147,8 +140,8 @@ class EmpController extends AbstractController
             $this->getEmpRepository()->deleteClient($client);
         }
 
-        return $this->redirectToRoute('app_clients', [
-            "clients" => $this->getEmpRepository()->findAll()
+        return $this->redirectToRoute('app_emps', [
+            "emps" => $this->getEmpRepository()->findAll()
         ]);
     }
 

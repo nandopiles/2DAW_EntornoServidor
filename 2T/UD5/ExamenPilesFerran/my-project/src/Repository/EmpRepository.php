@@ -22,7 +22,7 @@ class EmpRepository extends ServiceEntityRepository
     }
 
     /**
-     * Updates the client with the given id with the new data obtained by the form into the database.
+     * Updates the emp with the given id with the new data obtained by the form into the database.
      *
      * @param  integer $id
      * @param  Request $request
@@ -33,6 +33,21 @@ class EmpRepository extends ServiceEntityRepository
         $emp = $newDataEmp;
 
         $this->_em->persist($emp);
+        $this->_em->flush();
+    }
+
+    /**
+     * Inserts a new emp with the data obtained by the form into the database. 
+     *
+     * @return void 
+     */
+    public function insertEmp(Emp $newDataEmp)
+    {
+        $newEmp = new Emp();
+
+        $newEmp = $newDataEmp;
+
+        $this->_em->persist($newEmp);
         $this->_em->flush();
     }
 }

@@ -66,7 +66,6 @@ class ClientsController extends AbstractController
         $myForm->handleRequest($request);
 
         return $this->render("clients/update.html", [
-            "client" => $client,
             'updateForm' => $myForm->createView()
         ]);
     }
@@ -87,7 +86,6 @@ class ClientsController extends AbstractController
         $this->getClientRepository()->updateClient($client, $data);
 
         return $this->render("clients/update.html", [
-            "client" => $client,
             'updateForm' => $myForm->createView()
         ]);
     }
@@ -104,11 +102,7 @@ class ClientsController extends AbstractController
         $myForm = $this->createForm(ClienteType::class);
         $myForm->handleRequest($request);
 
-        // If it's GET it will display the "insert" template.
-        $empRepository = $this->getEntityManager()->getRepository(Emp::class);
-
         return $this->render("clients/insert.html", [
-            "employees" => $empRepository->findAll(),
             'insertForm' => $myForm->createView()
         ]);
     }
