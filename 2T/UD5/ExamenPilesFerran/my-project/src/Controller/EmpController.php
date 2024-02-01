@@ -46,11 +46,10 @@ class EmpController extends AbstractController
      * @return Response
      */
     #[Route('/emp/detail/{id}', name: 'app_detailEmp')] // Fetches via primary key because {id} is in the route
-    public function showDetailClient(Cliente $clientSelected): Response
+    public function showDetailClient(Emp $empSelected): Response
     {
-        return $this->render('detail.html', [
-            "client" => $clientSelected,
-            "emp" => $clientSelected->getReprCod()
+        return $this->render('emp/detail.html', [
+            "emp" => $empSelected,
         ]);
     }
 

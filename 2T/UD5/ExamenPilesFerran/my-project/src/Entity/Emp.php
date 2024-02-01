@@ -28,8 +28,6 @@ class Emp
     #[ORM\Column(nullable: true)]
     private ?int $salario = null;
 
-
-
     #[ORM\Column(nullable: true)]
     private ?int $comision = null;
 

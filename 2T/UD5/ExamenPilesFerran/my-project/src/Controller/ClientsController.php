@@ -49,8 +49,7 @@ class ClientsController extends AbstractController
     public function showDetailClient(Cliente $clientSelected): Response
     {
         return $this->render('clients/detail.html', [
-            "client" => $clientSelected,
-            "emp" => $clientSelected->getReprCod()
+            "client" => $clientSelected
         ]);
     }
 

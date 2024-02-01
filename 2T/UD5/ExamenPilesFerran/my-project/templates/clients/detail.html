@@ -6,7 +6,6 @@
 <table class="custom-table">
     <thead>
         <tr>
-            <th>Client Cod</th>
             <th>Name</th>
             <th>Address</th>
             <th>City</th>
@@ -21,7 +20,6 @@
     </thead>
     <tbody>
         <tr>
-            <td>{{ client.getId() }}</td>
             <td>{{ client.getNombre() }}</td>
             <td>{{ client.getDirec() }}</td>
             <td>{{ client.getCiudad() }}</td>
@@ -29,7 +27,7 @@
             <td>{{ client.getCodPostal() }}</td>
             <td>{{ client.getArea() }}</td>
             <td>{{ client.getTelefono() }}</td>
-            <td>{{ emp.getApellidos() }}</td> 
+            <td>{{ client.getReprCod().getApellidos() }}</td>
             <td>{{ client.getLimiteCredito() }}</td>
             <td>{{ client.getObservaciones() }}</td>
         </tr>
