@@ -128,7 +128,7 @@ class ClientsController extends AbstractController
     }
 
     /**
-     * Deletes a client by its id.
+     * Deletes a client.
      *
      * @param  number $id
      * @return void

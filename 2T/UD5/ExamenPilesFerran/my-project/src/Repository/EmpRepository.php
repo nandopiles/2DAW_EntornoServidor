@@ -50,4 +50,16 @@ class EmpRepository extends ServiceEntityRepository
         $this->_em->persist($newEmp);
         $this->_em->flush();
     }
+
+    /**
+     * Deletes the emp that matches with the id given by parameter.
+     *
+     * @param  number $id
+     * @return void
+     */
+    public function deleteEmp(Emp $emp)
+    {
+        $this->_em->remove($emp);
+        $this->_em->flush();
+    }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Cliente;
 use App\Entity\Emp;
 use App\Form\ClienteType;
 use App\Form\EmpType;
@@ -116,28 +115,28 @@ class EmpController extends AbstractController
     #[Route('/emp/insert', methods: ['POST'], name: 'insert_emp')]
     public function insert(Request $request): Response
     {
-        $myForm = $this->createForm(ClienteType::class);
+        $myForm = $this->createForm(EmpType::class);
         $myForm->handleRequest($request);
 
         $data = $myForm->getData();
         $this->getEmpRepository()->insertEmp($data);
 
         return $this->redirectToRoute('app_emps', [
-            "clients" => $this->getEmpRepository()->findAll()
+            "emps" => $this->getEmpRepository()->findAll()
         ]);
     }
 
     /**
-     * Deletes a client by its id.
+     * Deletes an emp.
      *
      * @param  number $id
      * @return void
      */
     #[Route('/emp/delete/{id}', name: 'delete_emp')]
-    public function delete(Cliente $client): Response
+    public function delete(Emp $emp): Response
     {
-        if ($client) {
-            $this->getEmpRepository()->deleteClient($client);
+        if ($emp) {
+            $this->getEmpRepository()->deleteEmp($emp);
         }
 
         return $this->redirectToRoute('app_emps', [
